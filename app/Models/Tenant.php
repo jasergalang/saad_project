@@ -9,17 +9,17 @@ class Tenant extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'tenants';
-    protected $fillable = ['accounts_id'];
+    protected $fillable = ['account_id'];
     use HasFactory;
 
     public function account()
     {
-        return $this->belongsTo(Account::class, 'accounts_id');
+        return $this->belongsTo(Account::class, 'account_id');
     }
 
     public function inquiries()
     {
-        return $this->hasMany(Inquiry::class, 'tenants_id');
+        return $this->hasMany(Inquiry::class, 'tenant_id');
     }
 
     public function feedbacks()

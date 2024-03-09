@@ -12,8 +12,8 @@ class Inquiry extends Model
 
     protected $table = 'inquiries';
     protected $fillable = [
-        'owners_id',
-        'tenants_id',
+        'owner_id',
+        'tenant_id',
         'properties_id',
         'inquiry_status'
     ];
@@ -21,18 +21,18 @@ class Inquiry extends Model
     use HasFactory;
     public function tenant()
     {
-        return $this->belongsTo(Tenant::class, 'tenants_id');
+        return $this->belongsTo(Tenant::class, 'tenant_id');
     }
     public function owners()
     {
-        return $this->belongsTo(Owner::class, 'owners_id');
+        return $this->belongsTo(Owner::class, 'owner_id');
     }
     public function property()
     {
-        return $this->belongsTo(Property::class, 'properties_id');
+        return $this->belongsTo(Property::class, 'property_id');
     }
     public function contract()
     {
-        return $this->hasOne(Contract::class, 'inquiries_id');
+        return $this->hasOne(Contract::class, 'inquiry_id');
     }
 }

@@ -9,7 +9,7 @@ class AdminManageTenant extends Model
 {
     protected $table = 'admin_manage_tenants';
     protected $fillable = [
-        'administrators_id', 'tenats_id'
+        'administrator_id', 'tenats_id'
     ];
     use HasFactory;
     public function tenant()

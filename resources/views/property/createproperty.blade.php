@@ -20,52 +20,9 @@
                     <option>House</option>
                 </select>
             </div>
-            <div class="mb-6 mx-10">
-                <div class="text-base font-semibold mb-2">Rental Terms:</div>
-                <div class="ml-36">
-                    <label class="flex items-center mb-2">
-                        <input type="checkbox" name="long_term" class="mr-2">
-                        <span class="font-semibold text-sm">For Long Term</span>
-                        <span class="text-xs text-gray-600 ml-1">(minimum of 6 months)</span>
-                    </label>
-
-                    <label class="flex items-center">
-                        <input type="checkbox" name="short_term" class="mr-2">
-                        <span class="font-semibold text-sm">For Short Term</span>
-                        <span class="text-xs text-gray-600 ml-1">(available for daily, weekly or monthly rent)</span>
-                    </label>
-                    <div class="text-xs text-gray-600 mt-1">Tip: You can pick both if applies.</div>
-                </div>
-            </div>
 
             <div class="mx-10">
 
-                <div class="flex items-center">
-                    <div class="text-base font-semibold mb-2">Minimum Stay:</div>
-                    <select id="stayDuration" name="minimum_stay" class="ml-7 rounded-md border border-gray-300 p-2 w-96">
-                        <option>--Choose One--</option>
-                        <optgroup label="Long Term">
-                            <option value="1 Year">1 Year</option>
-                            <option value="6 months">6 months</option>
-                        </optgroup>
-                        <optgroup label="Short Term">
-                            <option value="3 Months">3 Months</option>
-                            <option value="2 Months">2 Months</option>
-                            <option value="1 Month">1 Month</option>
-                            <option value="3 Weeks">3 Weeks</option>
-                            <option value="2 Weeks">2 Weeks</option>
-                            <option value="1 Week">1 Week</option>
-                            <option value="6 Nights">6 Nights</option>
-                            <option value="5 Nights">5 Nights</option>
-                            <option value="4 Nights">4 Nights</option>
-                            <option value="3 Nights">3 Nights</option>
-                            <option value="2 Nights">2 Nights</option>
-                            <option value="1 Night">1 Night</option>
-                        </optgroup>
-                    </select>
-                </div>
-
-                <div class="text-xs text-gray-600 ml-36 mt-1">Tip: Indicate how long is your minimum required stay for this property.</div>
             </div>
     {{-- end of Basic Info --}}
 
@@ -84,25 +41,6 @@
                     <i class="fa-solid fa-peso-sign ml-4"></i>
                     <input type="text" name="monthly_rate" placeholder="" class="rounded-md border border-gray-300 ml-6 w-96">
                 </div>
-            </div>
-
-            <div class="mx-10 mt-5 p-10 border border-black rounded-md">
-
-                <div class="text-xs text-gray-600 ml-56 mt-1">Daily Rate</div>
-
-                <div class="flex items-center">
-                    <div class="text-base font-semibold mb-2">Short Term Rental Rates:</div>
-                    <i class="fa-solid fa-peso-sign ml-4"></i>
-                    <input type="text" name="daily_rate" placeholder="" class="rounded-md border border-gray-300 ml-6 w-96">
-                </div>
-
-
-                <div class="text-xs text-gray-600 ml-56 mt-5">Weekly Rate</div>
-                <div class="mx-48 flex items-center">
-                    <i class="fa-solid fa-peso-sign ml-3"></i>
-                    <input type="text" name="weekly_rate" placeholder="" class="rounded-md border border-gray-300 ml-6 w-96">
-                </div>
-
             </div>
 
         </div>

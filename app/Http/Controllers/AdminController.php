@@ -48,7 +48,7 @@ class AdminController extends Controller
         $accounts_id = auth()->id();
         $owner = Owner::findOrFail($id);
 
-        $administrator = Administrator::where('accounts_id', $accounts_id)->first();
+        $administrator = Administrator::where('account_id', $accounts_id)->first();
 
         if ($administrator) {
             $owner->verification_status = 'verified';
@@ -71,7 +71,7 @@ class AdminController extends Controller
         $accounts_id = auth()->id();
         $properties = Property::findOrFail($id);
 
-        $administrator = Administrator::where('accounts_id', $accounts_id)->first();
+        $administrator = Administrator::where('account_id', $accounts_id)->first();
 
         if ($administrator) {
             if ($properties->verification_status !== 'verified') {

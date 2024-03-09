@@ -15,8 +15,6 @@ class CreateRatesTable extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->foreignId('property_id')->primary()->constrained('properties')->onDelete('cascade');
-            $table->decimal('daily_rate', 9, 2);
-            $table->decimal('weekly_rate', 9, 2);
             $table->decimal('monthly_rate', 9, 2);
             $table->timestamps();
         });

@@ -9,7 +9,7 @@ class AdminManageOwner extends Model
 {
     protected $table = 'admin_manage_owners';
     protected $fillable = [
-        'administrators_id', 'owners_id'
+        'administrator_id', 'owner_id'
     ];
     use HasFactory;
 }

@@ -14,8 +14,8 @@ class CreateAdminManagePropertiesTable extends Migration
     public function up()
     {
         Schema::create('admin_manage_properties', function (Blueprint $table) {
-            $table->foreignId('administrators_id')->constrained('administrators')->onDelete('cascade');
-            $table->foreignId('properties_id')->constrained('properties')->onDelete('cascade');
+            $table->foreignId('administrator_id')->constrained('administrators')->onDelete('cascade');
+            $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
             $table->timestamps();
         });
     }

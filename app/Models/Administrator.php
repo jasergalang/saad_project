@@ -9,20 +9,20 @@ class Administrator extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'administrators';
-    protected $fillable = ['id', 'accounts_id'];
+    protected $fillable = ['id', 'account_id'];
     use HasFactory;
 
     public function account()
     {
-        return $this->belongsTo(Account::class, 'accounts_id');
+        return $this->belongsTo(Account::class, 'account_id');
     }
     public function owners()
     {
-        return $this->belongsToMany(Owner::class, 'admin_manage_owners', 'administrators_id', 'owners_id');
+        return $this->belongsToMany(Owner::class, 'admin_manage_owners', 'administrator_id', 'owner_id');
     }
     public function properties()
     {
-        return $this->belongsToMany(Property::class, 'admin_manage_properties', 'administrators_id', 'properties_id');
+        return $this->belongsToMany(Property::class, 'admin_manage_properties', 'administrator_id', 'property_id');
     }
 
 

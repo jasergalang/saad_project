@@ -15,8 +15,8 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('inquiries_id')->constrained('inquiries')->onDelete('cascade');
-            $table->string('contracts_status')->default('active');
+            $table->foreignId('inquiry_id')->constrained('inquiries')->onDelete('cascade');
+            $table->string('contract_status')->default('active');
             $table->string('payment_method');
             $table->string('payment_agreement')->default('');
             $table->string('lease_agreement')->nullable();

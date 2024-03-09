@@ -15,7 +15,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contracts_id')->constrained('contracts')->onDelete('cascade');
+            $table->foreignId('contract_id')->constrained('contracts')->onDelete('cascade');
             $table->string('payment_status');
             $table->date('payment_date')->nullable(); // New column for payment date
             $table->string('payment_image')->nullable();

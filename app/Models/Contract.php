@@ -11,7 +11,7 @@ class Contract extends Model
     protected $table = 'contracts';
 
     protected $fillable = [
-        'inquiries_id',
+        'inquiry_id',
         'contracts_status',
         'payment_method',
         'lease_agreement',
@@ -23,11 +23,11 @@ class Contract extends Model
 
     public function payment()
     {
-        return $this->hasMany(Payment::class, 'contracts_id');
+        return $this->hasMany(Payment::class, 'contract_id');
     }
     public function inquiry()
     {
-        return $this->belongsTo(Inquiry::class, 'inquiries_id');
+        return $this->belongsTo(Inquiry::class, 'inquirys_id');
     }
 
 }

@@ -15,9 +15,9 @@ class CreateInquiriesTable extends Migration
     {
         Schema::create('inquiries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tenants_id')->constrained('tenants')->onDelete('cascade');
-            $table->foreignId('properties_id')->constrained('properties')->onDelete('cascade');
-            $table->foreignId('owners_id')->constrained('owners')->onDelete('cascade');
+            $table->foreignId('tenant_id')->constrained('tenants')->onDelete('cascade');
+            $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
+            $table->foreignId('owner_id')->constrained('owners')->onDelete('cascade');
             $table->string('inquiry_status')->default('pending');
             $table->timestamps();
         });

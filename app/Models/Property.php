@@ -23,12 +23,12 @@ class Property extends Model
 
     public function administrators()
     {
-        return $this->belongsToMany(Administrator::class, 'admin_manage_properties', 'properties_id','administrators_id');
+        return $this->belongsToMany(Administrator::class, 'admin_manage_properties', 'property_id','administrator_id');
     }
 
     public function owner()
     {
-        return $this->belongsTo(Owner::class, 'owners_id');
+        return $this->belongsTo(Owner::class, 'owner_id');
     }
 
     public function feedbacks()

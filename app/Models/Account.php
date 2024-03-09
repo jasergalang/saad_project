@@ -30,16 +30,16 @@ class Account extends Authenticatable
     }
     public function owner()
     {
-        return $this->hasOne(Owner::class, 'accounts_id');
+        return $this->hasOne(Owner::class, 'account_id');
     }
 
     public function tenant()
     {
-        return $this->hasOne(Tenant::class, 'accounts_id');
+        return $this->hasOne(Tenant::class, 'account_id');
     }
 
     public function admninistrator()
     {
-        return $this->hasOne(Administrator::class, 'accounts_id');
+        return $this->hasOne(Administrator::class, 'account_id');
     }
 }

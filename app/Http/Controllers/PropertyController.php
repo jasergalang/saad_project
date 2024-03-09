@@ -56,7 +56,7 @@ class PropertyController extends Controller
     {
         $accounts_id = auth()->id();
 
-        $owner = Owner::where('accounts_id', $accounts_id)->first();
+        $owner = Owner::where('account_id', $accounts_id)->first();
         if (!$owner) {
 
             return redirect()->back()->with('error', 'Owner not found.');
@@ -90,12 +90,8 @@ class PropertyController extends Controller
         $owner = Owner::find($ownerID);
 
         $propertyData = $request->only([
-            'property_type', 'minimum_stay'
+            'property_type'
         ]);
-
-        $propertyData['long_term'] = $request->has('long_term') ? 1 : 0;
-        $propertyData['short_term'] = $request->has('short_term') ? 1 : 0;
-
         $property = $owner->properties()->create($propertyData) ;
 
 
@@ -138,7 +134,7 @@ class PropertyController extends Controller
 
         //rate
         $rateData = $request->only([
-            'weekly_rate', 'monthly_rate', 'daily_rate'
+            'monthly_rate'
         ]);
         $rateData['property_id'] = $propertyId;
         $rate = Rate::create($rateData);
@@ -185,7 +181,7 @@ class PropertyController extends Controller
                         'image_path' => $imageName,
                     ]);
                 }
-                return redirect()->route('imagesproperty')->with('success', 'Images uploaded successfully.');
+                return redirect()->route('user')->with('success', 'Images uploaded successfully.');
             }
             return redirect()->route('imagesproperty')->with('error', 'No images were uploaded.');
 

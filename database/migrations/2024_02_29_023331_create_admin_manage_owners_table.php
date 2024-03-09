@@ -14,8 +14,8 @@ class CreateAdminManageOwnersTable extends Migration
     public function up()
     {
         Schema::create('admin_manage_owners', function (Blueprint $table) {
-            $table->foreignId('administrators_id')->constrained('administrators')->onDelete('cascade');
-            $table->foreignId('owners_id')->constrained('owners')->onDelete('cascade');
+            $table->foreignId('administrator_id')->constrained('administrators')->onDelete('cascade');
+            $table->foreignId('owner_id')->constrained('owners')->onDelete('cascade');
             $table->timestamps();
         });
 

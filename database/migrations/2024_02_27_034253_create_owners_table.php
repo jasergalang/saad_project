@@ -15,9 +15,10 @@ class CreateOwnersTable extends Migration
     {
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('accounts_id')->constrained('accounts')->onDelete('cascade');
-            $table->string('verification_status')->default('pending');
+            $table->foreignId('account_id')->constrained('accounts')->onDelete('cascade');
             $table->string('facebook_link')->nullable();
+            $table->string('file_path')->nullable();
+            $table->string('verification_status')->default('pending');
             $table->timestamps();
         });
     }

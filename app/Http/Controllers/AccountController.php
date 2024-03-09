@@ -54,19 +54,19 @@ class AccountController extends Controller
             $request->session()->regenerate();
             switch ($account->roles) {
                 case 'owner':
-                    $owner = Owner::where('accounts_id', $account->id)->first();
+                    $owner = Owner::where('account_id', $account->id)->first();
                     if ($owner) {
                         return redirect()->route('user')->with('ownerID', $owner->id);
                     }
                     break;
                 case 'tenant':
-                    $tenant = Tenant::where('accounts_id', $account->id)->first();
+                    $tenant = Tenant::where('account_id', $account->id)->first();
                     if ($tenant) {
                         return redirect()->route('index')->with('tenantID', $tenant->id);
                     }
                     break;
                 case 'admin':
-                    $administrator = Administrator::where('accounts_id', $account->id)->first();
+                    $administrator = Administrator::where('account_id', $account->id)->first();
                     if ($administrator) {
                         return redirect()->route('adminInterface')->with('administratorID', $administrator->id);
                     }
@@ -82,6 +82,7 @@ class AccountController extends Controller
     function llregister(Request $request)
     {
         $this->validateRegistration($request, 'owner');
+
         $data = [
             'fname' => $request->fname,
             'lname' => $request->lname,
@@ -90,18 +91,35 @@ class AccountController extends Controller
             'password' => Hash::make($request->password),
             'roles' => 'owner',
         ];
+
         $account = Account::create($data);
 
         if (!$account) {
             return redirect(route('llregister'))->with("fail", "Registration Failed!! Please Try Again.");
         }
+
         $ownerData = [
-            'accounts_id' => $account->id,
+            'account_id' => $account->id,
             'facebook_link' => $request->facebook_link,
         ];
+
         $owner = new Owner($ownerData);
+
+        if ($request->hasFile('uploaded_files')) {
+            $filePaths = [];
+
+            foreach ($request->file('uploaded_files') as $file) {
+                $fileName = uniqid() . '_' . $file->getClientOriginalName();
+                $file->storeAs('documents', $fileName, 'public');
+                $filePaths[] = $fileName;
+            }
+            $owner->file_path = implode(',', $filePaths);
+        }
+
         $account->owner()->save($owner);
+
         return redirect(route('login'))->with("success", "Registration Successful!!");
+
     }
     function ttregister(Request $request)
     {
@@ -119,7 +137,7 @@ class AccountController extends Controller
             return redirect(route('ttregister'))->with("fail", "Registration Failed!! Please Try Again.");
         }
         $tenant = new Tenant();
-        $tenant->accounts_id = $account->id;
+        $tenant->account_id = $account->id;
         $tenant->save();
 
         return redirect(route('login'))->with("success", "Registration Successful!!");
@@ -143,7 +161,7 @@ class AccountController extends Controller
             return redirect(route('adregister'))->with("fail", "Registration Failed!! Please Try Again.");
         }
 
-        $administrator = new Administrator(['accounts_id' => $account->id]);
+        $administrator = new Administrator(['account_id' => $account->id]);
         $administrator->save();
 
         return redirect(route('login'))->with("success", "Registration Successful!!");
@@ -166,7 +184,7 @@ class AccountController extends Controller
     public function users()
     {
         $accounts_id = auth()->id();
-        $owners = Owner::where('accounts_id', $accounts_id)->get();
+        $owners = Owner::where('account_id', $accounts_id)->get();
 
         $properties = $owners->flatMap(function ($owner) {
             return $owner->properties;

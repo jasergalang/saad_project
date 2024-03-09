@@ -15,11 +15,8 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('owners_id')->constrained('owners')->onDelete('cascade');
+            $table->foreignId('owner_id')->constrained('owners')->onDelete('cascade');
             $table->string('property_type');
-            $table->boolean("long_term");
-            $table->boolean('short_term');
-            $table->string('minimum_stay')->default('');
             $table->string('verification_status')->default('pending');
             $table->string('availability')->default('available');
             $table->timestamps();

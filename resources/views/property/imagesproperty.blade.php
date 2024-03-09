@@ -1,11 +1,6 @@
 @extends('layout.authlayout')
 
 @section('content')
-    {{-- login --}}
-    @include('layout.header')
-
-    @include('layout.nav')
-
     {{-- primary photo --}}
     <div class="container mx-auto p-6 bg-white">
         <div class="text-lg font-bold mb-4 my-10 mx-20 border-b">Adding Photos</div>
@@ -28,9 +23,10 @@
                         </div>
                     </div>
 
+                    <div class="text-lg font-bold mb-5 my-10 mx-20 border-b">Selected Photos:</div>
 
-                    <div id="imageContainer" class="border p-4 grid grid-cols-3 gap-4">
-                        <!-- Images will be dynamically added here -->
+                    <div id="imageContainer" class="border p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
                     </div>
 
                     <div class="container mx-auto p-6 bg-white">
@@ -45,9 +41,30 @@
 
     @include('layout.footer')
 @endsection
-
 @section('scripts')
     @parent
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function (e) {
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = '';
+
+            const files = e.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('w-full', 'object-cover', 'h-32', 'md:h-48', 'lg:h-64');
+                    imageContainer.appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 
     @if(session('success'))
         <script>
@@ -55,8 +72,8 @@
         </script>
     @endif
     @if(session('error'))
-    <script>
-        alert("{{ session('error') }}");
-    </script>
-@endif
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
 @endsection

@@ -11,7 +11,7 @@ class Payment extends Model
     protected $table = 'payments';
 
     protected $fillable = [
-        'contracts_status',
+        'contract_status',
         'payment_date',
         'payment_status',
         'payment_imaeg',
@@ -25,7 +25,7 @@ class Payment extends Model
     }
     public function contract()
     {
-        return $this->belongsTo(Contract::class, 'contracts_id');
+        return $this->belongsTo(Contract::class, 'contract_id');
     }
     public function owners()
     {

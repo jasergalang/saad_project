@@ -26,7 +26,7 @@ class ContractController extends Controller
     {
         $accountId = auth()->user()->id;
 
-        if (!$request->has('properties_id') || !Property::where('id', $request->input('properties_id'))->exists()) {
+        if (!$request->has('property_id') || !Property::where('id', $request->input('property_id'))->exists()) {
             return redirect()->back()->with('error', 'Invalid or missing properties_id')->withInput();
         }
         $property = Property::findOrFail($request->properties_id);
@@ -36,9 +36,9 @@ class ContractController extends Controller
         }
         $tenant = Tenant::where('accounts_id', $accountId)->first();
         Inquiry::create([
-            'tenants_id' => $tenant->id,
-            'owners_id' => $property->owner->id,
-            'properties_id' => $property->id,
+            'tenant_id' => $tenant->id,
+            'owner_id' => $property->owner->id,
+            'property_id' => $property->id,
         ]);
 
         return redirect()->back()->with('success', 'Inquiry submitted successfully!');
@@ -47,13 +47,13 @@ class ContractController extends Controller
     public function inquiriesform()
     {   $accountId = auth()->user()->id;
 
-        $owner = Owner::with('account')->where('accounts_id', $accountId)->first();
+        $owner = Owner::with('account')->where('account_id', $accountId)->first();
         if (!$owner) {
             return redirect()->route('home')->with('error', 'Owner not found.');
         }
 
         $ownerId = $owner->id;
-        $inquiries = Inquiry::where('owners_id', $ownerId)
+        $inquiries = Inquiry::where('owner_id', $ownerId)
             ->with(['tenant.account', 'property.description'])
             ->get();
 
@@ -66,7 +66,7 @@ class ContractController extends Controller
 
         $authenticatedUserId = auth()->user()->id;
 
-        $owner = Owner::where('accounts_id', $authenticatedUserId)->first();
+        $owner = Owner::where('account_id', $authenticatedUserId)->first();
 
         if (!$owner || $owner->id != $inquiry->property->owner->id) {
             return redirect()->back()->with('error', 'Unauthorized action!');
@@ -97,7 +97,7 @@ class ContractController extends Controller
         $authenticatedUserId = auth()->user()->id;
 
         // Find the owner with the corresponding accounts_id
-        $owner = Owner::where('accounts_id', $authenticatedUserId)->first();
+        $owner = Owner::where('account_id', $authenticatedUserId)->first();
 
         if (!$owner || $owner->id != $inquiry->property->owner->id) {
             return redirect()->back()->with('error', 'Unauthorized action!');
@@ -108,7 +108,7 @@ class ContractController extends Controller
         return redirect()->back()->with('success', 'Inquiry rejected successfully!');
 
     }
-    public function createContract(Request $request, $inquiries_id)
+    public function createContract(Request $request, $inquiry_id)
     {
         $propertyTitle = session('propertyTitle');
         $tenantDetails = session('tenantDetails');
@@ -121,7 +121,7 @@ class ContractController extends Controller
         ]);
 
         $contractData = [
-            'inquiries_id' => $inquiries_id,
+            'inquiry_id' => $inquiry_id,
             'payment_method' => $request->input('payment_method'),
             'payment_agreement' => $request->input('payment_agreement'),
             'start_date' => $request->input('start_date'),
@@ -203,7 +203,7 @@ class ContractController extends Controller
     {
         $accountId = auth()->user()->id;
 
-        $tenant = Tenant::where('accounts_id', $accountId)->first();
+        $tenant = Tenant::where('account_id', $accountId)->first();
         $accounts = Account::find($accountId);
         if (!$tenant) {
             abort(404, 'Tenant not found');
@@ -266,7 +266,7 @@ class ContractController extends Controller
         $accountId = auth()->user()->id;
 
         // Retrieve the owner model associated with the authenticated account
-        $owner = Owner::with('account')->where('accounts_id', $accountId)->first();
+        $owner = Owner::with('account')->where('account_id', $accountId)->first();
 
         if (!$owner) {
             return redirect()->route('home')->with('error', 'Owner not found.');
@@ -274,7 +274,7 @@ class ContractController extends Controller
 
         $ownerId = $owner->id;
 
-        $inquiries = Inquiry::where('owners_id', $ownerId)
+        $inquiries = Inquiry::where('owner_id', $ownerId)
             ->with('property.rate', 'property.address', 'contract.payment')
             ->get();
 
