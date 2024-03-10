@@ -128,8 +128,7 @@
                         {{-- status --}}
                         <h4 class="text-xl font-bold">
                             Landlord
-                        </h4>
-
+                        </h4>\
                         {{-- number --}}
                         <h2 class="text-md font-semibold">
                             {{ $property->owner->account->contact }}
@@ -150,17 +149,25 @@
                     Facebook
                 </a>
             </div>
-            <div class="col-span-2 text-center px-2 pb-3 overflow-hidden">
-                <form action="{{ route('inquire.post') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="properties_id" value="{{ $property->id }}">
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center cursor-pointer">
-                        <i class="fas fa-envelope mr-2"></i>
-                        Inquire
-                    </button>
-                </form>
+   {{-- send inquiry section --}}
+        <div class="col-span-2 text-center px-2 pb-3 overflow-hidden">
+            <button onclick="openChatModal()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center cursor-pointer">
+                <i class="fas fa-envelope mr-2"></i>
+                Inquire
+            </button>
+        </div>
 
-            </div>
+        <script>
+            function openChatModal() {
+                document.getElementById('chatModal').classList.remove('hidden');
+            }
+
+            function closeChatModal() {
+                document.getElementById('chatModal').classList.add('hidden');
+            }
+        </script>
+        {{-- end of send inquiry section --}}
+
 
 
 

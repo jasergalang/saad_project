@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Owner;
+use App\Models\Message;
 use App\Models\Tenant;
 use App\Models\Account;
 use Illuminate\Http\Request;
@@ -68,7 +69,7 @@ class AccountController extends Controller
                 case 'admin':
                     $administrator = Administrator::where('account_id', $account->id)->first();
                     if ($administrator) {
-                        return redirect()->route('adminInterface')->with('administratorID', $administrator->id);
+                        return redirect()->route('adminManagement')->with('administratorID', $administrator->id);
                     }
                     break;
                 default:
@@ -192,5 +193,7 @@ class AccountController extends Controller
 
         return view('account.user', compact('properties'));
     }
+
+
 
 }

@@ -16,9 +16,11 @@ class AdminController extends Controller
         $tenants = Tenant::with('account')->get();
         return view('admin.adminInterface',compact('owners', 'properties','tenants'));
     }
-    function landlordVerification()
+    function adminVerification()
     {
-        return view('admin.landlordVerification', compact('owners'));
+        $properties = Property::all();
+        $owners = Owner::all();
+        return view('admin.adminVerification', compact('owners', 'properties'));
     }
     function propertyVerification()
     {
@@ -27,10 +29,11 @@ class AdminController extends Controller
         return view('admin.propertyVerification', compact('properties'));
     }
 
-    function adminManageOwner()
+    function adminManagement()
     {
-        $owners = Owner::with('account')->get();
-        return view('admin.adminManageOwner', compact('owners'));
+        $owners = Owner::all();
+        $tenants = Tenant::all();
+        return view('admin.adminManagement', compact('owners','tenants'));
     }
     function adminManageProperty()
     {
@@ -77,7 +80,6 @@ class AdminController extends Controller
             if ($properties->verification_status !== 'verified') {
                 $properties->update(['verification_status' => 'verified']);
 
-                // Switch the order of administrator ID and property ID in the attach method
                 $properties->administrators()->attach($administrator->id, ['created_at' => now(), 'updated_at' => now()]);
 
                 return redirect()->back()->with('success', 'Property verification status updated successfully');
