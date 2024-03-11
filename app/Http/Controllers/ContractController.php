@@ -27,14 +27,15 @@ class ContractController extends Controller
         $accountId = auth()->user()->id;
 
         if (!$request->has('property_id') || !Property::where('id', $request->input('property_id'))->exists()) {
-            return redirect()->back()->with('error', 'Invalid or missing properties_id')->withInput();
+            return redirect()->back()->with('error', 'Invalid or missing property_id')->withInput();
         }
-        $property = Property::findOrFail($request->properties_id);
+
+        $property = Property::findOrFail($request->property_id);
 
         if ($property->owner->id == $accountId) {
             return redirect()->back()->with('error', 'You cannot inquire about your own property!');
         }
-        $tenant = Tenant::where('accounts_id', $accountId)->first();
+        $tenant = Tenant::where('account_id', $accountId)->first();
         Inquiry::create([
             'tenant_id' => $tenant->id,
             'owner_id' => $property->owner->id,

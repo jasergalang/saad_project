@@ -42,4 +42,15 @@ class Account extends Authenticatable
     {
         return $this->hasOne(Administrator::class, 'account_id');
     }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
 }

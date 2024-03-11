@@ -15,7 +15,7 @@
             <span class="font-semibold text-lg text-center text-red-500 mb-2">FindFlat</span>
         </p>
         <form action="{{route('login.post')}}" method="post">
-            @if($errors->any())
+            {{-- @if($errors->any())
                     <div class="alert alert-danger text-red-500">
                         <ul>
                             @foreach($errors->all() as $error)
@@ -23,7 +23,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    @endif
+                    @endif --}}
 
             @csrf
 
@@ -86,6 +86,9 @@
 @include('layout.footer');
 @endsection
 
+
+
+
 @section('scripts')
     @parent
 
@@ -95,11 +98,16 @@
         </script>
     @endif
     @if(session('error'))
-    <script>
-        alert("{{ session('error') }}");
-    </script>
-@endif
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            var errorMessage = @json($errors->all());
+            alert(errorMessage.join('\n'));
+        </script>
+    @endif
 @endsection
-
-
 

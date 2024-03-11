@@ -54,6 +54,7 @@ class PropertyController extends Controller
     }
     public function propertylisting(Request $request)
     {
+
         $accounts_id = auth()->id();
 
         $owner = Owner::where('account_id', $accounts_id)->first();
@@ -62,31 +63,29 @@ class PropertyController extends Controller
             return redirect()->back()->with('error', 'Owner not found.');
         }
         $ownerID = $owner->id;
-        // $request->validate([
-        //     'property_type' => 'required|string',
-        //     'long_term' => 'nullable|boolean',
-        //     'short_term' => 'nullable|boolean',
-        //     'minimum_stay' => 'required|string',
-        //     'monthly_rate' => 'required|numeric',
-        //     'daily_rate' => 'nullable|numeric',
-        //     'weekly_rate' => 'nullable|numeric',
-        //     'pool' => 'nullable|boolean',
-        //     'gym' => 'nullable|boolean',
-        //     'balcony' => 'nullable|boolean',
-        //     'parking' => 'nullable|boolean',
-        //     'pets_allowed' => 'nullable|boolean',
-        //     'security' => 'nullable|boolean',
-        //     'floor_area' => 'required|numeric',
-        //     'furnishing' => 'required|string',
-        //     'bedrooms' => 'required|integer',
-        //     'bathrooms' => 'required|integer',
-        //     'title' => 'required|string',
-        //     'description' => 'required|string',
-        //     'unit_number' => 'required|string',
-        //     'floor' => 'required|string',
-        //     'street' => 'required|string',
-        //     'city' => 'required|string',
-        // ]);
+        $request->validate([
+            'property_type' => 'required|string',
+            'monthly_rate' => 'required|numeric',
+            'pool' => 'nullable|numeric|in:0,1',
+            'gym' => 'nullable|numeric|in:0,1',
+            'balcony' => 'nullable|numeric|in:0,1',
+            'parking' => 'nullable|numeric|in:0,1',
+            'pets_allowed' => 'nullable|numeric|in:0,1',
+            'security' => 'nullable|numeric|in:0,1',
+            'floor_area' => 'required|string',
+            'furnishing' => 'required|string',
+            'bedrooms' => 'required|integer',
+            'bathrooms' => 'required|integer',
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'unit_number' => 'required|string',
+            'floor' => 'required|string',
+            'street' => 'required|string',
+            'city' => 'required|string',
+            'security_deposit' => 'required|numeric',
+        ]);
+
+
         $owner = Owner::find($ownerID);
 
         $propertyData = $request->only([
@@ -101,12 +100,12 @@ class PropertyController extends Controller
         $propertyId = $property->id;
         $amenityData = [
             'property_id' => $propertyId,
-            'gym' => $request->boolean('gym'),
-            'pool' => $request->boolean('pool'),
-            'parking' => $request->boolean('parking'),
-            'balcony' => $request->boolean('balcony'),
-            'security' => $request->boolean('security'),
-            'pets_allowed' => $request->boolean('pets_allowed'),
+            'gym' => $request->has('gym') ? $request->filled('gym') : 0,
+            'pool' => $request->has('pool') ? $request->filled('pool') : 0,
+            'parking' => $request->has('parking') ? $request->filled('parking') : 0,
+            'balcony' => $request->has('balcony') ? $request->filled('balcony') : 0,
+            'security' => $request->has('security') ? $request->filled('security') : 0,
+            'pets_allowed' => $request->has('pets_allowed') ? $request->filled('pets_allowed') : 0,
         ];
 
         $amenity = Amenity::create($amenityData);

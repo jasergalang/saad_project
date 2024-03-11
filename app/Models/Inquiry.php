@@ -14,7 +14,7 @@ class Inquiry extends Model
     protected $fillable = [
         'owner_id',
         'tenant_id',
-        'properties_id',
+        'property_id',
         'inquiry_status'
     ];
 

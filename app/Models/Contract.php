@@ -13,7 +13,6 @@ class Contract extends Model
     protected $fillable = [
         'inquiry_id',
         'contracts_status',
-        'payment_method',
         'lease_agreement',
         'start_date',
         'end_date',

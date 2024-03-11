@@ -31,7 +31,8 @@ Route::get('sample', function () {
     return view('viewproperty');
 }); */
 
-
+Route::get('/chat/{property}', [AccountController::class, 'showChat'])->name('chat.show');
+    Route::post('/chat/send', [AccountController::class, 'sendMessage'])->name('chat.send');
 
 // Route::get('/chat', [AccountController::class, 'showChat'])->name('chat.show');
 // Route::post('/send-message', [AccountController::class, 'sendMessage'])->name('chat.sendMessage');

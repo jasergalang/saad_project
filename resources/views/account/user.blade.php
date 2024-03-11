@@ -45,7 +45,7 @@
                         @foreach($properties as $property)
                         <tr>
                             <td class="px-4 py-2 border-b border-gray-400" style="width: 30%;">
-                                <img src="{{ asset("/storage/public/images/". $property->image->image_path) }}" alt="Property Photo">
+                                <img src="{{ asset("/storage/images/". $property->image->image_path) }}" alt="Property Photo">
                             </td>
                             <td class="px-4 py-2 border-b border-gray-400" style="width: 30%;">{{ $property->description->description }}</td>
                             <td class="px-5 py-2 border-b border-gray-400 text-center" style="width: 15%;">

@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Owner;
-use App\Models\Message;
 use App\Models\Tenant;
 use App\Models\Account;
+use App\Models\Message;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Models\Administrator;
 use Illuminate\Support\Facades\Auth;
@@ -45,9 +46,15 @@ class AccountController extends Controller
     function loginPost(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:8|max:15',
-        ]);
+        'email' => 'required|email',
+        'password' => 'required|min:8|max:15',
+    ], [
+        'email.required' => 'Email is required.',
+        'email.email' => 'Invalid email format.',
+        'password.required' => 'Password is required.',
+        'password.min' => 'Password must be at least 8 characters.',
+        'password.max' => 'Password must not exceed 15 characters.',
+    ]);
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
@@ -193,7 +200,73 @@ class AccountController extends Controller
 
         return view('account.user', compact('properties'));
     }
+    public function showChat(Property $property)
+    {
+        $user = auth()->user();
+        $messages = Message::where('property_id', $property->id)
+                          ->with('fromUser')
+                          ->orderBy('created_at')
+                          ->get();
 
+        return view('tenant.chat', compact('property', 'messages', 'user'));
+    }
+
+
+    public function sendMessage(Request $request)
+    {
+        // Validate the form data
+        $request->validate([
+            'property_id' => 'required|exists:properties,id',
+            'content' => 'required|string',
+        ]);
+
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Determine the sender and receiver based on the user role
+        $senderId = $user->id;
+        $property = Property::find($request->input('property_id'));
+
+        if ($user->roles == 'tenant') {
+            // Tenant is the sender, owner is the receiver
+            $receiverId = $property->owner->account->id;
+        } elseif ($user->roles == 'owner') {
+            // Owner is the sender, find the tenant who initiated the conversation
+            $receiverId = $property->inquiries()->first()->tenant->account->id;
+        } else {
+            // Handle other user roles or unauthorized access
+            abort(403, 'Unauthorized access to send message.');
+        }
+
+        $message = new Message([
+            'sender_id' => $senderId,
+            'receiver_id' => $receiverId,
+            'property_id' => $request->input('property_id'),
+            'content' => $request->input('content'),
+        ]);
+
+        $message->save();
+
+        // Fetch the latest messages for the given property ID
+        $latestMessages = $this->getLatestMessages($request->input('property_id'));
+
+        return response()->json(['success' => true, 'messages' => $latestMessages]);
+    }
+
+
+    protected function getLatestMessages($propertyId)
+    {
+        // Retrieve the latest messages for the given property ID using Eloquent
+        $latestMessages = Message::where('property_id', $propertyId)
+            ->orderBy('created_at', 'content')
+            ->take(10) // Assuming you want to retrieve the latest 10 messages, adjust as needed
+            ->get();
+
+        // Optionally, you can eager load the sender information for each message
+        $latestMessages->load('fromUser');
+
+        return $latestMessages;
+    }
 
 
 }

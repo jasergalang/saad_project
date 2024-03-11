@@ -149,25 +149,52 @@
                     Facebook
                 </a>
             </div>
-   {{-- send inquiry section --}}
-        <div class="col-span-2 text-center px-2 pb-3 overflow-hidden">
-            <button onclick="openChatModal()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center cursor-pointer">
-                <i class="fas fa-envelope mr-2"></i>
-                Inquire
-            </button>
-        </div>
+            <div class="col-span-2 text-center px-2 pb-3 overflow-hidden">
+                @php
+                $hasInquired = false; // Assuming no inquiry has been made initially
 
-        <script>
-            function openChatModal() {
-                document.getElementById('chatModal').classList.remove('hidden');
-            }
+                // Check if the user is authenticated and has already inquired about this property
+                if(auth()->check()) {
+                    $loggedInUserId = auth()->user()->id;
+                        $tenant = \App\Models\Tenant::where('account_id', $loggedInUserId)->first();
 
-            function closeChatModal() {
-                document.getElementById('chatModal').classList.add('hidden');
-            }
-        </script>
-        {{-- end of send inquiry section --}}
+                        if ($tenant) {
+                            $hasInquired = $tenant->inquiries()->where('property_id', $property->id)->exists();
+                        }
+                    }
+            @endphp
 
+@if(!$hasInquired)
+<form action="{{ route('inquire.post') }}" method="post" class="mt-4">
+    @csrf
+    <input type="hidden" name="property_id" value="{{ $property->id }}">
+
+    @auth
+        <input type="hidden" name="id" value="{{ auth()->user()->id }}">
+        <label for="name" class="block text-sm font-medium text-gray-700">Your Name:</label>
+        <input type="text" name="name" value="{{ auth()->user()->fname }}" readonly class="mt-1 p-2 border rounded w-full" required>
+    @endauth
+
+    <label for="message" class="block text-sm font-medium text-gray-700 mt-4">Message:</label>
+    <textarea name="message" rows="4" cols="50" placeholder="Type your message here..." class="mt-1 p-2 border rounded w-full" required></textarea>
+
+    <!-- Add other form fields as needed -->
+
+    <button type="submit" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center cursor-pointer">
+        <i class="fas fa-envelope mr-2"></i>
+        Inquire
+    </button>
+</form>
+@else
+<a href="{{ route('chat.show', $property->id) }}" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+    <i class="fas fa-comment-alt mr-2"></i>
+    Chat with Landlord
+</a>
+@endif
+
+
+
+            </div>
 
 
 

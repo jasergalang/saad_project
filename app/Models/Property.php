@@ -56,7 +56,7 @@ class Property extends Model
     }
     public function inquiries()
     {
-        return $this->hasMany(Inquiry::class, 'properties_id');
+        return $this->hasMany(Inquiry::class, 'property_id');
     }
 
     public function detail()

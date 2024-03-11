@@ -20,9 +20,10 @@
                     <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">ID</th>
                     <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">Tenant Name</th>
                     <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">Property Title</th>
-                    <!-- Add more columns as needed -->
+                    <th class="py-2 text-gray-800 border-b border-r border-gray-400">View Chat</th>
                     <th class="py-2 text-gray-800 border-b border-r border-gray-400">Accept</th>
                     <th class="py-2 text-gray-800 border-b border-gray-400">Reject</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,11 @@
                     <td class="px-4 py-2 border-b border-gray-400">{{ $inquiry->id }}</td>
                     <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->tenant->account)->fname }} {{ optional($inquiry->tenant->account)->lname }}</td>
                     <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->property->description)->title }}</td>
+                    <td class="px-4 py-2 border-b border-gray-400 text-center">
+                        <a href="{{ route('chat.show', $inquiry->id) }}" class="bg-transparent rounded-md px-5 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </td>
                     <td class="px-4 py-2 border-b border-gray-400 text-center">
                         <form action="{{ route('inquiries.accept', $inquiry->id) }}" method="post">
                             @csrf
@@ -67,6 +73,7 @@
                 <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">ID</th>
                 <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">Tenant Name</th>
                 <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">Property Title</th>
+                <th class="py-2 text-gray-800 border-b border-r border-gray-400">View Chat</th>
 
                 <th class="py-2 text-gray-800 border-b border-r border-gray-400">Status</th>
             </tr>
@@ -78,6 +85,11 @@
                 <td class="px-4 py-2 border-b border-gray-400">{{ $inquiry->id }}</td>
                 <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->tenant->account)->fname }} {{ optional($inquiry->tenant->account)->lname }}</td>
                 <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->property->description)->title }}</td>
+                <td class="px-4 py-2 border-b border-gray-400 text-center">
+                    <a href="{{ route('chat.show', $inquiry->id) }}" class="bg-transparent rounded-md px-5 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold">
+                        <i class="fa-solid fa-comments"></i>
+                    </a>
+                </td>
                 <td class="px-4 py-2 border-b border-gray-400">{{ $inquiry->inquiry_status }}</td>
             </tr>
             @endif
