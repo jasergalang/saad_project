@@ -8,7 +8,7 @@
    <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('https://images.pexels.com/photos/5407074/pexels-photo-5407074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
         <div class="container">
             <h1 class="text-4xl text-white font-medium mb-4">
-                RenEase
+                FIndFlat
             </h1>
             <p class="text-xl text-white font-medium mb-4">
                 Renting a place to stay is like unlocking a door to possibilities, <br>
@@ -141,8 +141,6 @@
 
                  {{-- end of products image --}}
                 </div>
-
-
 
 {{-- q&a ? --}}
     <div class="bg-white pt-16 pb-12 border-t border-gray-100">

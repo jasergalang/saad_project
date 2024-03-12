@@ -32,7 +32,8 @@
                                             <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400 bg-gray-300">ID</th>
                                             <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400 bg-gray-300">Name</th>
                                             <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400 bg-gray-300">Email</th>
-                                            <th class="py-2 text-gray-800 border-b border-gray-400 bg-gray-300">Delete</th>
+                                            <th class="py-2 text-gray-800 border-b  border-r border-gray-400 bg-gray-300">Delete</th>
+                                            <th class="py-2 text-gray-800 border-r border-gray-400 bg-gray-300">Restore</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -59,7 +60,7 @@
 
                         {{-- renters list --}}
                         <div class="px-4 pb-2 overflow-hidden my-3 mt-20 rounded-2xl">
-                            <div class="px-4 pb-2 bg-white rounded-2xl overflow-hidden">
+b                                            gg                              <div class="px-4 pb-2 bg-white rounded-2xl overflow-hidden">
                                 <div class="mr-14 flex items-center">
                                     <h3 class="text-xl mt-5 font-semibold">
                                         Renters

@@ -19,6 +19,7 @@ class CreatePropertiesTable extends Migration
             $table->string('property_type');
             $table->string('verification_status')->default('pending');
             $table->string('availability')->default('available');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -32,7 +32,7 @@ Route::get('sample', function () {
 }); */
 
 Route::get('/chat/{property}', [AccountController::class, 'showChat'])->name('chat.show');
-    Route::post('/chat/send', [AccountController::class, 'sendMessage'])->name('chat.send');
+Route::post('/chat/send', [AccountController::class, 'sendMessage'])->name('chat.send');
 
 // Route::get('/chat', [AccountController::class, 'showChat'])->name('chat.show');
 // Route::post('/send-message', [AccountController::class, 'sendMessage'])->name('chat.sendMessage');
@@ -46,7 +46,6 @@ Route::middleware(['web'])->group(function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('logout', [AccountController::class, 'logout'])->name('logout');
 });
-
 
 Route::prefix('register')->group(function () {
     Route::get('landlord', [AccountController::class, 'landlordregister'])->name('landlordregister');
@@ -80,7 +79,11 @@ Route::prefix('tenant')->middleware(['auth', 'tenant'])->group(function () {
 
 // Routes for Owner
 Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
+
+    Route::post('/properties/{id}/restore', [AccountController::class, 'restore'])->name('properties.restore');
+
     Route::get('manageContract', [ContractController::class, 'manageContract'])->name('manageContract');
+
 
     Route::get('createproperty', [PropertyController::class, 'createproperty'])->name('createproperty')->middleware('verified.owner');
     Route::post('createproperty', [PropertyController::class, 'propertylisting'])->name('propertylisting.post');

@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
+    use SoftDeletes;
     protected $primaryKey = 'id';
-
+    protected $dates = ['deleted_at'. 'updated_at', 'created_at'];
     protected $table = 'properties';
 
     protected $fillable = [
@@ -20,6 +22,7 @@ class Property extends Model
         'verification_status',
     ];
     use HasFactory;
+
 
     public function administrators()
     {
@@ -72,4 +75,5 @@ class Property extends Model
     {
         return $this->hasMany(AdminManageProperties::class, 'property_id');
     }
+
 }
