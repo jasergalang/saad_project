@@ -22,12 +22,6 @@
 
 
             {{-- listing a property button --}}
-            <a href="paymentform" class="text-center text-gray-700 hover:text-primary transition relative">
-                <div class="text-2xl">
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                </div>
-                <div class="text-sx leading-3">Payment Form</div>
-            </a>
 
 
             {{-- account button --}}

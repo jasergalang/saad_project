@@ -1,8 +1,7 @@
 @extends('layout.authlayout')
 
 @section('content')
-    @include('layout.header')
-    @include('layout.ownernav')
+
 
     <form action="{{ route('createcontract', ['inquiry_id' => $inquiries_id]) }}" method="post" enctype="multipart/form-data">
         @csrf

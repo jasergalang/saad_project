@@ -1,7 +1,11 @@
 @extends('layout.authlayout')
 
 @section('content')
-@include('layout.ownerheader')
+<div class="flex justify-end px-6 py-4">
+    <a href="{{ route('manageContract') }}" class="text-black text-2xl font-semibold">
+        <i class="fa-solid fa-circle-xmark mr-5 fa-lg"></i>
+    </a>
+</div>
 
     <form method="post" action="{{ route('payment.submit', ['contractId' => $contract->id]) }}" enctype="multipart/form-data">
         @csrf

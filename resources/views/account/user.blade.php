@@ -1,10 +1,8 @@
 @extends('layout.authlayout')
-
 @section('content')
 
-@include('layout.header')
+@include('layout.ownerheader')
 
-@include('layout.ownernav')
 
 
 {{-- account wrapper --}}
@@ -13,7 +11,7 @@
         <div class="flex items-center">
             <img src="https://www.svgrepo.com/show/507442/user-circle.svg" class="w-40 mr-10" alt="">
             <h3 class="text-xl font-semibold">
-                John Doe
+                {{ $account->fname }} {{ $account->lname }}
             </h3>
             <i class="fa-solid fa-minus mx-4"></i>
             <h5 id="editProfileButton" class="text-sm font-light text-gray-600 hover:text-primary cursor-pointer">

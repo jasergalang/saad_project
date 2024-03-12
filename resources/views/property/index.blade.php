@@ -49,54 +49,56 @@
         </div>
    </div>
 {{-- end of feature --}}
-{{-- browsing by categories --}}
-    <div class="container py-16">
-        <h2 class="text-3xl font-medium text-gray-800 mb-6">Rent by Category</h2>
 
-        <div class="grid grid-cols-3 gap-3">
-            <!-- Location -->
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1531761535209-180857e963b9?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
-                <a href="#" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Location</a>
-            </div>
-            <!-- Property Type -->
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1546&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
-                <a href="#" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Property Type</a>
-            </div>
-            <!-- Price -->
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=80&w=1546&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
-                <a href="#" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Price</a>
-            </div>
-            <!-- Bedrooms -->
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="https://plus.unsplash.com/premium_photo-1670076505419-99468d952c61?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
-                <a href="#" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Bedrooms</a>
-            </div>
-            <!-- Short Term -->
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
-                <a href="#" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Short Term</a>
-            </div>
-            <!-- Bathrooms -->
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
-                <a href="#" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Bathrooms</a>
-            </div>
-            <!-- Floor Area -->
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="https://plus.unsplash.com/premium_photo-1676823547757-f00b51e17eff?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
-                <a href="#" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Floor Area</a>
-            </div>
-            <!-- Amenities -->
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1668911128602-9c03cf73df99?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
-                <a href="#" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Amenities</a>
-            </div>
+{{-- browsing by categories --}}
+<div class="container py-16">
+    <h2 class="text-3xl font-medium text-gray-800 mb-6">Rent by Category</h2>
+
+    <div class="grid grid-cols-3 gap-3">
+        <!-- Location -->
+        <div class="relative rounded-sm overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1531761535209-180857e963b9?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
+            <a href="showproperty#location-id" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Location</a>
+        </div>
+        <!-- Property Type -->
+        <div class="relative rounded-sm overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1546&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
+            <a href="showproperty#property-id" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Property Type</a>
+        </div>
+        <!-- Price -->
+        <div class="relative rounded-sm overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=80&w=1546&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
+            <a href="showproperty#price-id" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Price</a>
+        </div>
+        <!-- Bedrooms -->
+        <div class="relative rounded-sm overflow-hidden group">
+            <img src="https://plus.unsplash.com/premium_photo-1670076505419-99468d952c61?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
+            <a href="showproperty#bedrooms-id" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Bedrooms</a>
+        </div>
+        <!-- Short Term -->
+        <div class="relative rounded-sm overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
+            <a href="showproperty#shortterm-id" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Short Term</a>
+        </div>
+        <!-- Bathrooms -->
+        <div class="relative rounded-sm overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
+            <a href="showproperty#bathrooms-id" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Bathrooms</a>
+        </div>
+        <!-- Floor Area -->
+        <div class="relative rounded-sm overflow-hidden group">
+            <img src="https://plus.unsplash.com/premium_photo-1676823547757-f00b51e17eff?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
+            <a href="showproperty#floor-id" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Floor Area</a>
+        </div>
+        <!-- Amenities -->
+        <div class="relative rounded-sm overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1668911128602-9c03cf73df99?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-cover">
+            <a href="showproperty#amenities-id" class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-50 transition">Amenities</a>
         </div>
     </div>
+</div>
 {{-- end of browing by categories --}}
+
 
 
                 <div class="container mb-10 grid grid-cols-3 gap-3">

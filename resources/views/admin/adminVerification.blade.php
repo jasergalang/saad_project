@@ -3,17 +3,17 @@
 @section('content')
 @include('layout.adminNavbar');
     {{-- SA LOOB NITO YUNG MAIN PAGE --}}
-    <div class="content flex-grow p-4 ml-0 bg-transparent pt-20">
+    <div class="content flex-grow ml-0 bg-transparent pt-20">
 
         {{-- verifiication wrapper --}}
-            <div class="container p-6 mt-10">
+            <div class="container p-6">
 
                 <div class="grid grid-cols-5 gap-4">
 
-                    <div class="col-span-5 bg-transparent rounded-lg shadow-sm">
+                    <div class="col-span-5 bg-white rounded-lg p-10 shadow-sm">
 
                         {{-- list nto --}}
-                        <div class="px-4 pb-2 overflow-hidden my-3 rounded-2xl">
+                        <div class="px-4 pb-2 overflow-hidden my-3 rounded-2xl hover:scale-105 hover:shadow-2xl transition">
                             <div class="px-4 pb-2 bg-white rounded-2xl overflow-hidden">
                                 <div class="mr-14 flex items-center">
                                     <h3 class="text-xl mt-5 font-semibold">
@@ -69,7 +69,7 @@
                         </div>
 
                         {{-- properties --}}
-                        <div class="px-4 pb-2 overflow-hidden my-3 mt-28 rounded-2xl">
+                        <div class="px-4 pb-2 overflow-hidden my-3 mt-28 rounded-2xl hover:scale-105 hover:shadow-2xl transition">
                             <div class="px-4 pb-2 bg-white rounded-2xl overflow-hidden">
                                 <div class="mr-14 flex items-center">
                                     <h3 class="text-xl mt-5 font-semibold">
@@ -142,8 +142,9 @@
     </div>
 
 
-@include('layout.footer')
+{{-- @include('layout.footer') --}}
 @endsection
+
 
 @section('scripts')
     @parent

@@ -1,6 +1,6 @@
 <div class="fixed top-0 left-0 right-0 z-10">
     {{-- navbar --}}
-    <div class=" bg-white py-5 px-5">
+    <div class=" bg-white py-5 px-10">
         <div class="flex justify-between items-center">
             <div class="flex-initial flex items-center">
                 <img src="https://www.svgrepo.com/show/272028/houses-home.svg" alt="homelogo" class="w-10">
@@ -8,10 +8,13 @@
             </div>
 
             <div class="flex-1 flex justify-center space-x-6">
-                <a href="" class="text-black hover:text-gray-300">Dashboard</a>
-                <a href="{{ route('adminVerification') }}" class="text-black hover:text-gray-300 ">Verification</a>
-                <a href="{{ route('adminManagement') }}" class="text-black hover:text-gray-300">Management</a>
-                <a href="{{ route('adminproperty') }}" class="text-black hover:text-gray-300">Properties</a>
+                <a href="" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Dashboard</a>
+                <a href="{{ route('adminVerification') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Verification</a>
+                <a href="{{ route('adminproperty') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Properties</a>
+                <a href="{{ route('adminproperty') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Renter's List</a>
+                <a href="{{ route('adminproperty') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Landlord's List</a>
+                <a href="{{ route('adminproperty') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Contracts</a>
+                <a href="{{ route('adminManagement') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Payments</a>
             </div>
             <div class="flex-initial">
                 @auth
@@ -19,7 +22,7 @@
                         <div class="text-2xl">
                             <i class="fa-solid fa-right-from-bracket"></i>
                         </div>
-                        <div class="text-sx leading-3">Logout</div>
+                        {{-- <div class="text-sx leading-3">Logout</div> --}}
                     </a>
                 @else
                     <!-- Show login link for unauthenticated users -->
@@ -33,6 +36,5 @@
             </div>
 
         </div>
-        <hr class="my-2 text-gray-400">
     </div>
 </div>

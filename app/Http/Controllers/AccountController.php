@@ -186,7 +186,7 @@ class AccountController extends Controller
     public function users()
     {
         $accountId = auth()->id();
-
+        $account = Account::find($accountId);
         // Retrieve owners with all properties (including soft-deleted)
         $owners = Owner::with(['properties' => function ($query) {
             $query->withTrashed(); // Include soft-deleted properties
@@ -199,7 +199,7 @@ class AccountController extends Controller
             return $owner->properties;
         })->all();
 
-        return view('account.user', compact('properties'));
+        return view('account.user', compact('properties','account'));
     }
     public function showChat(Property $property)
     {
