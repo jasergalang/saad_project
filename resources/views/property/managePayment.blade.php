@@ -11,7 +11,6 @@
         </div>
 
         <div class="overflow-x-auto py-5 my-3 bg-gray-300 rounded-lg">
-            <h4 class="font-semibold mb-3">Total Income by Property Type:</h4>
             @php
                 $totalIncomeByPropertyType = [];
                 foreach ($payments as $payment) {
@@ -65,7 +64,7 @@
             @endphp
 
             @foreach ($totalIncomeByPropertyType as $propertyType => $totalIncome)
-                <li>{{ $propertyType }}: Php{{ $totalIncome }}</li>
+                <li>{{ $propertyType }}: Php {{ $totalIncome }}</li>
                 @php
                     $totalAllIncome += $totalIncome;
                 @endphp

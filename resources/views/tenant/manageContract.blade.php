@@ -32,11 +32,26 @@
                         <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->tenant->account)->fname }}</td>
                         <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->contract)->contract_status }}</td>
                         <td class="px-4 py-2 border-b border-gray-400">
-                            <button class="bg-transparent rounded-md px-5 py-1 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold">
-                                <a href=" {{route('paymentform',($inquiry->contract)->id )}}" title="Payment Form">
-                                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                                </a>
-                            </button>
+                            @php
+                                $hasZeroBalance = false;
+                                if ($inquiry->contract && $inquiry->contract->payment) {
+                                    foreach ($inquiry->contract->payment as $payment) {
+                                        if ($payment->balance == 0) {
+                                            $hasZeroBalance = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            @endphp
+                            @if ($hasZeroBalance)
+                                <button class="bg-transparent rounded-md px-5 py-1 cursor-not-allowed opacity-50" title="Payment Form" disabled>
+                            @else
+                                <button class="bg-transparent rounded-md px-5 py-1 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold">
+                                    <a href="{{ route('paymentform', optional($inquiry->contract)->id) }}" title="Payment Form">
+                                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                                    </a>
+                                </button>
+                            @endif
                         </td>
                         <td class="px-5 py-2 border-b border-gray-400 text-center" style="width: 15%;"><button class="bg-transparent rounded-md px-5 py-1 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold"><i class="fa-solid fa-circle-minus"></i></button></td>
                     </tr>

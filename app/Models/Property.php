@@ -16,9 +16,7 @@ class Property extends Model
     protected $fillable = [
         'owners_id',
         'property_type',
-        'long_term',
-        'short_term',
-        'minimum_stay',
+        'file_path',
         'verification_status',
     ];
     use HasFactory;

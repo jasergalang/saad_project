@@ -63,6 +63,7 @@ class PropertyController extends Controller
             return redirect()->back()->with('error', 'Owner not found.');
         }
         $ownerID = $owner->id;
+
         $request->validate([
             'property_type' => 'required|string',
             'monthly_rate' => 'required|numeric',
@@ -83,16 +84,24 @@ class PropertyController extends Controller
             'street' => 'required|string',
             'city' => 'required|string',
             'security_deposit' => 'required|numeric',
+            // 'file_path' => 'required|mimes:pdf,docx,jpg,jpeg,png|max:2048',
         ]);
-
 
         $owner = Owner::find($ownerID);
 
-        $propertyData = $request->only([
-            'property_type'
-        ]);
-        $property = $owner->properties()->create($propertyData) ;
+        // Handle file upload
+    // if ($request->hasFile('file_path')) {
+    //     $uploadedFilePath = $request->file('file_path')->store('documents', 'public');
+    // } else {
+    //     return redirect()->back()->with('error', 'File upload is required.');
+    // }
 
+    // Create property with file path
+    $property = $owner->properties()->create([
+        'property_type' => $request->input('property_type'),
+        // // Add other property attributes here...
+        // 'file_path' => $uploadedFilePath, // Store the file path directly
+    ]);
 
         $request->session()->put('propertyID', $property->id);
 

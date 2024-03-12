@@ -292,14 +292,21 @@ class ContractController extends Controller
             ->get();
 
         $contracts = [];
+        $payment = [];
 
         foreach ($inquiries as $inquiry) {
             $contracts[] = $inquiry->contract;
+            // Check if payments exist before accessing them
+            if ($inquiry->contract && $inquiry->contract->payments) {
+                foreach ($inquiry->contract->payments as $payment) {
+                    $payment[] = $payment;
+                }
+            }
         }
 
-        return view('tenant.manageContract', compact('contracts','inquiries'));
-
+        return view('tenant.manageContract', compact('contracts', 'inquiries', 'payment'));
     }
+
 
 
 }

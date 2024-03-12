@@ -18,6 +18,7 @@ class CreatePropertiesTable extends Migration
             $table->foreignId('owner_id')->constrained('owners')->onDelete('cascade');
             $table->string('property_type');
             $table->string('verification_status')->default('pending');
+            $table->string('file_path')->nullable();
             $table->string('availability')->default('available');
             $table->softDeletes();
             $table->timestamps();
