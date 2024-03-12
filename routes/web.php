@@ -82,9 +82,11 @@ Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
 
     Route::get('manageContract', [ContractController::class, 'manageContract'])->name('manageContract');
 
+    Route::get('/showpayment', [ContractController::class, 'showpayment'])->name('showpayment');
 
-    Route::post('/submit-payment', [ContractController::class, 'submitPayment'])->name('submit.payment');
+    Route::post('/payment/{contractId}', [ContractController::class, 'submitpayment'])->name('payment.submit');
     Route::get('/paymentform/{contractId}', [ContractController::class, 'paymentform'])->name('paymentform');
+
     Route::post('paymentformPost', [ContractController::class, 'paymentformPost'])->name('paymentformPost');
     Route::get('createproperty', [PropertyController::class, 'createproperty'])->name('createproperty')->middleware('verified.owner');
     Route::post('createproperty', [PropertyController::class, 'propertylisting'])->name('propertylisting.post');

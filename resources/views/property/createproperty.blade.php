@@ -143,27 +143,33 @@
                     <div class="flex flex-col space-y-2 mx-5">
                         {{-- Add checkboxes with appropriate names --}}
                         <label class="flex items-center">
-                            <input type="checkbox" name="balcony" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <input type="hidden" name="balcony" value="0">
+    <input type="checkbox" name="balcony" value="1" class="form-checkbox h-4 w-4 text-indigo-600">
                             <span class="ml-2">Balcony</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="pool" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <input type="hidden" name="pool" value="0">
+                            <input type="checkbox" name="pool" value="1" class="form-checkbox h-4 w-4 text-indigo-600">
                             <span class="ml-2">Swimming Pool</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="gym" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <input type="hidden" name="gym" value="0">
+                            <input type="checkbox" name="gym" value="1" class="form-checkbox h-4 w-4 text-indigo-600">
                             <span class="ml-2">Gym</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="security" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <input type="hidden" name="security" value="0">
+    <input type="checkbox" name="security" value="1" class="form-checkbox h-4 w-4 text-indigo-600">
                             <span class="ml-2">24/7 Security</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="parking" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <input type="hidden" name="parking" value="0">
+                            <input type="checkbox" name="parking" value="1" class="form-checkbox h-4 w-4 text-indigo-600">
                             <span class="ml-2">Parking</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="pets_allowed" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <input type="hidden" name="pets_allowed" value="0">
+                            <input type="checkbox" name="pets_allowed" value="1" class="form-checkbox h-4 w-4 text-indigo-600">
                             <span class="ml-2">Pets Allowed</span>
                         </label>
                     </div>

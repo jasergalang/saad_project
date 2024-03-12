@@ -11,11 +11,12 @@ class Payment extends Model
     protected $table = 'payments';
 
     protected $fillable = [
-        'contract_status',
-        'payment_date',
+        'contract_id',
+        'amount',
+        'balance',
+        'date',
         'payment_status',
-        'payment_imaeg',
-
+        'file_path',
     ];
     use HasFactory;
 

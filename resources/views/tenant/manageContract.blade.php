@@ -1,8 +1,7 @@
 @extends('layout.authlayout')
 @section('content')
 
-@include('layout.header')
-@include('layout.ownernav')
+@include('layout.ownerheader')
 
 <div class="container gap-6 border-t pt-4 pb-16 items-start">
 

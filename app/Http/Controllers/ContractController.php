@@ -149,37 +149,68 @@ class ContractController extends Controller
 
     public function paymentform($id)
     {
-        // Fetch the contract and its related data
         $contract = Contract::with(['inquiry.property.description', 'inquiry.property.address', 'inquiry.tenant.account'])
             ->findOrFail($id);
 
-        return view('property.paymentform', compact('contract'));
+            $payment = Payment::where('contract_id', $contract->id)->latest()->first(); // Retrieve the latest payment for the contract
+            return view('property.paymentform', compact('contract', 'payment'));
     }
 
-    public function submitPayment(Request $request)
+
+    public function submitPayment(Request $request, $contractId)
     {
         $request->validate([
-            'payment_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'amount' => 'required|numeric|min:0',
+            'date' => 'required|date',
+            'file_path' => 'required|mimes:pdf,docx,jpg,jpeg,png,gif,bmp|max:800',
         ]);
-        $contract = Contract::find($request->input('contract_id'));
-        if (!$contract) {
-            return redirect()->back()->with('error', 'Invalid contract ID.');
+
+        // Find the contract
+        $contract = Contract::findOrFail($contractId);
+
+        // Retrieve the latest payment for the contract
+        $latestPayment = Payment::where('contract_id', $contract->id)->latest()->first();
+
+        // Calculate balance based on the latest payment
+        if ($latestPayment) {
+            $balance = $latestPayment->balance - $request->input('amount');
+        } else {
+            $balance = $contract->inquiry->property->rate->monthly_rate - $request->input('amount');
         }
-        $payment = new Payment([
-            'payment_status' => 'paid',
-            'payment_date' => $request->input('payment_date'),
+
+        // Handle file upload
+        $uploadedFilePath = '';
+        if ($request->hasFile('file_path')) {
+            $uploadedFile = $request->file('file_path');
+            $fileName = uniqid() . '_' . $uploadedFile->getClientOriginalName();
+            $uploadedFile->storeAs('documents', $fileName, 'public');
+            $uploadedFilePath = $fileName;
+        }
+
+        // Set payment status based on the balance
+        $paymentStatus = ($balance == 0) ? 'paid' : 'partially_paid';
+
+        // Create payment record
+        Payment::create([
+            'contract_id' => $contractId,
+            'payment_status' => $paymentStatus,
+            'amount' => $request->input('amount'),
+            'balance' => $balance,
+            'date' => $request->input('date'),
+            'file_path' => json_encode([$uploadedFilePath]),
         ]);
-        $contract->payment()->save($payment);
-        if ($request->hasFile('payment_image')) {
-            $imageFile = $request->file('payment_image');
-            $customFilename = 'payment_' . time() . '.' . $imageFile->getClientOriginalExtension();
 
-            $imagePath = $imageFile->storeAs('images', $customFilename, 'public');
+        // Update contract status
+        $contract->update(['status' => $paymentStatus]);
 
-            $payment->payment_image = $imagePath;
-            $payment->save();
-        }
-        return redirect()->back()->with('success', 'Payment submitted successfully!');
+        return redirect()->route('paymentform', ['contractId' => $contractId])
+            ->with('success', 'Payment submitted successfully');
+    }
+
+    public function showpayment()
+    {
+        $payments = Payment::with('contract.inquiry.property.description', 'contract.inquiry.tenant.account')->get();
+        return view('property.managePayment', compact('payments'));
     }
     public function profile()
     {

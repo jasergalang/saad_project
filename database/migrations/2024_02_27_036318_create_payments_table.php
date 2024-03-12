@@ -17,8 +17,10 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->foreignId('contract_id')->constrained('contracts')->onDelete('cascade');
             $table->string('payment_status');
-            $table->date('payment_date')->nullable();
-            $table->string('payment_image')->nullable();
+            $table->integer('amount');
+            $table->integer('balance');
+            $table->date('date')->nullable();
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }

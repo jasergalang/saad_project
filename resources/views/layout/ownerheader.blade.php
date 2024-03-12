@@ -17,6 +17,7 @@
                     <div class="flex items-center space-x-6 capitalize ml-10">
                         <a href="{{route('inquiriesform')}}" class="text-gray-100 hover:underline hover:text-red-500 hover:scale-105 transition">Inquiries</a>
                         <a href="{{route('manageContract')}}" class="text-gray-100 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">Contracts</a>
+                        <a href="{{route('showpayment')}}" class="text-gray-100 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">Payments</a>
                         {{-- <a href="#" class="text-gray-700 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">About us</a> --}}
 
                         @include('layout.message')
