@@ -248,9 +248,6 @@ class AccountController extends Controller
 
         $message->save();
 
-        // Fetch the latest messages for the given property ID
-        // $latestMessages = $this->getLatestMessages($request->input('property_id'));
-
         return redirect()->back()->with('success', 'Property restored successfully.');
     }
 

@@ -16,11 +16,59 @@
                 John Doe
             </h3>
             <i class="fa-solid fa-minus mx-4"></i>
-            <h5 class="text-sm font-light text-gray-400 hover:text-primary cursor-pointer">
+            <h5 id="editProfileButton" class="text-sm font-light text-gray-600 hover:text-primary cursor-pointer">
                 Edit Profile
             </h5>
         </div>
+
+        {{-- Edit Profile form container --}}
+        <div id="editProfileContainer" class="hidden absolute bg-white rounded-lg shadow-md p-10 w-104 mt-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+            <button id="closeProfileButton" class="absolute top-2 right-2 text-gray-600 hover:text-red-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <form class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" class="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" class="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone:</label>
+                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number" class="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
+
+                <div>
+                    <label for="profilePicture" class="block text-sm font-medium text-gray-700">Profile Picture:</label>
+                    <input type="file" id="profilePicture" name="profilePicture" class="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
+
+                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition duration-300">Save Changes</button>
+            </form>
+        </div>
+
     </div>
+</div>
+</div>
+
+<script>
+document.getElementById('editProfileButton').addEventListener('click', function() {
+    var container = document.getElementById('editProfileContainer');
+    container.classList.toggle('hidden');
+});
+
+document.getElementById('closeProfileButton').addEventListener('click', function() {
+    var container = document.getElementById('editProfileContainer');
+    container.classList.add('hidden');
+});
+</script>
+
 
     <div class="container gap-6 border-t pt-4 pb-16 items-start">
 
