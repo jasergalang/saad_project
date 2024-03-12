@@ -44,46 +44,7 @@
                     <span id="balance" name="balance">$0.00</span>
                 </div>
 
-                <script>
-                    // Get elements
-                    var amountPaidInput = document.getElementById('amountPaid');
-                    var propertyRate = parseFloat('{{ $payment ? $payment->balance : $contract->inquiry->property->rate->monthly_rate }}');
-                    var balanceSpan = document.getElementById('balance');
-                    var balanceMessage = document.getElementById('balanceMessage');
 
-                    // Function to calculate balance and show message if amount exceeds the total
-                    function calculateBalance() {
-                        var amountPaid = parseFloat(amountPaidInput.value);
-                        var balance = propertyRate - amountPaid;
-                        balance = Math.max(0, balance);
-                        balanceSpan.innerText = 'Php ' + balance.toFixed(2);
-
-                        if (amountPaid > propertyRate) {
-                            balanceMessage.innerText = 'Amount exceeds the total to be paid.';
-                        } else {
-                            balanceMessage.innerText = '';
-                        }
-                    }
-
-                    // Add input event listener to amountPaid input
-                    amountPaidInput.addEventListener('input', calculateBalance);
-
-                    // Initialize balance based on existing payment, if available
-                    window.onload = function() {
-                        if ({{ $payment ? 'true' : 'false' }}) {
-                            var amountPaid = parseFloat('{{ $payment->balance }}');
-                            amountPaidInput.value = amountPaid; // Set the input value to the amount paid
-                            calculateBalance(); // Calculate balance and display message if needed
-                        }
-                    };
-                </script>
-
-            {{-- <div class="pt-5">
-                <button id="checkBalance" class="bg-primary hover:bg-transparent border hover:border-primary text-white hover:text-primary font-bold py-2 px-4 rounded-md w-full">
-                    Check Balance
-                </button>
-                <span id="balanceMessage" class="text-red-500"></span>
-            </div> --}}
             <div class="pt-5">
                 <label for="paymentDate" class="text-base font-semibold mr-2">Payment Date:</label>
                 <input type="date" id="paymentDate" name="date" class="rounded-md border border-gray-300 p-2 w-full">
@@ -118,9 +79,6 @@
             </div>
         </div>
 
-
-
-
             <div class="pt-5">
                 <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md w-full">
                     Submit Payment
@@ -137,30 +95,29 @@
 
 @section('scripts')
     @parent
-    {{-- <script>
-        // Add an event listener to the amountPaid input field
-        document.getElementById('amountPaid').addEventListener('input', function () {
-            calculateBalance();
-        });
+    <script>
+        window.onload = function() {
+            var propertyRate = parseFloat('{{ $payment ? $payment->balance : $contract->inquiry->property->rate->monthly_rate }}');
+            var amountPaidInput = document.getElementById('amountPaid');
+            var balanceSpan = document.getElementById('balance');
 
-        // Function to calculate and display the balance
-        function calculateBalance() {
-            var amountPaid = parseFloat(document.getElementById('amountPaid').value);
-            var propertyRate = parseFloat('{{ $contract->inquiry->property->rate->monthly_rate }}');
-
-            if (isNaN(amountPaid)) {
-                document.getElementById('balanceMessage').innerText = 'Please enter a valid amount.';
-            } else {
+            // Function to calculate balance and update UI
+            function calculateBalance() {
+                // Parse the inputted amount
+                var amountPaid = parseFloat(amountPaidInput.value);
+                // Calculate the balance by subtracting the amount paid from the total amount
                 var balance = propertyRate - amountPaid;
-                document.getElementById('balanceMessage').innerText = 'Remaining balance: $' + balance.toFixed(2);
+                // Update the UI to display the balance
+                balanceSpan.innerText = 'Php ' + balance.toFixed(2);
             }
-        }
 
-        // Automatically calculate and display the balance on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            calculateBalance();
-        });
-    </script> --}}
+            // Add input event listener to amountPaid input
+            amountPaidInput.addEventListener('input', calculateBalance);
+
+            // Trigger the input event initially to calculate the balance based on any existing value
+            amountPaidInput.dispatchEvent(new Event('input'));
+        };
+    </script>
     @if(session('success'))
         <script>
             alert("{{ session('success') }}");
