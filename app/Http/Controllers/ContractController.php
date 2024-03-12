@@ -147,31 +147,13 @@ class ContractController extends Controller
         return redirect()->back()->with('success', 'Contract created successfully');
     }
 
-
-
-
-    public function paymentform()
+    public function paymentform($id)
     {
-        $accountId = auth()->user()->id;
-        $user = Account::with('tenant.inquiries.property.rate', 'tenant.inquiries.property.address', 'tenant.inquiries.contract.payment')->find($accountId);
+        // Fetch the contract and its related data
+        $contract = Contract::with(['inquiry.property.description', 'inquiry.property.address', 'inquiry.tenant.account'])
+            ->findOrFail($id);
 
-        $inquiry = $user->tenant->inquiries->first();
-        $contract = $inquiry ? $inquiry->contract : null;
-        $property = $inquiry ? $inquiry->property : null;
-        $paymentDate = null;
-
-        if ($contract) {
-            $payment = $contract->payment->first();
-            if ($payment) {
-                $paymentDate = $payment->payment_date;
-            } else {
-                $paymentDate = $contract->start_date;
-            }
-        }
-
-        $totalAmount = $property ? $property->rate->weekly : null;
-
-        return view('tenant.paymentform', compact('property', 'paymentDate', 'totalAmount', 'contract'));
+        return view('property.paymentform', compact('contract'));
     }
 
     public function submitPayment(Request $request)

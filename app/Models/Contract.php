@@ -26,7 +26,7 @@ class Contract extends Model
     }
     public function inquiry()
     {
-        return $this->belongsTo(Inquiry::class, 'inquirys_id');
+        return $this->belongsTo(Inquiry::class, 'inquiry_id');
     }
 
 }

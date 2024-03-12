@@ -1,9 +1,9 @@
 {{-- navbar (1) --}}
-<div class="bg-gray-700">
+<div class="">
     <div class="container flex">
 
          {{-- categories --}}
-         <div class="mr-5">
+         {{-- <div class="mr-5">
              <div class="px-8 py-4 hover:bg-primary flex items-center cursor-pointer relative group">
                  <span class="text-white">
                      <i class="fas fa-bars"></i>
@@ -60,18 +60,18 @@
                      </a>
                  </div>
              </div>
-         </div>
+         </div> --}}
          {{-- end of categories --}}
 
          {{-- navbar links --}}
-         <div class="flex items-center justify-between flex-grow pl-12">
+         <div class="flex items-center justify-between flex-grow py-3 pl-96">
              <div class="flex items-center space-x-6 capitalize">
-                 <a href="{{route('inquiriesform')}}" class="text-gray-200 hover:underline hover:text-white transition">Inquiries</a>
-                 <a href="{{route('manageContract')}}" class="text-gray-200 hover:underline hover:text-white transition">Contracts</a>
-                 <a href="#" class="text-gray-200 hover:underline hover:text-white transition">About us</a>
+                 <a href="{{route('inquiriesform')}}" class="text-gray-200 hover:underline hover:text-white hover:scale-105 transition">Inquiries</a>
+                 <a href="{{route('manageContract')}}" class="text-gray-200 hover:underline hover:text-white pl-12 hover:scale-105 transition">Contracts</a>
+                 <a href="#" class="text-gray-200 hover:underline hover:text-white pl-12 hover:scale-105 transition">About us</a>
              </div>
              {{-- login and register --}}
-             <a href="login" class="text-gray-200 hover:underline hover:text-white transition">Login/Register</a>
+             {{-- <a href="login" class="text-gray-200 hover:underline hover:text-white transition">Login/Register</a> --}}
              {{-- end of login and register --}}
          </div>
          {{-- end of navbar links --}}

@@ -210,6 +210,7 @@
 
 @include('layout.footer');
 @endsection
+
 @section('scripts')
     @parent
 
@@ -219,8 +220,16 @@
         </script>
     @endif
     @if(session('error'))
-    <script>
-        alert("{{ session('error') }}");
-    </script>
-@endif
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            var errorMessage = @json($errors->all());
+            alert(errorMessage.join('\n'));
+        </script>
+    @endif
 @endsection
+

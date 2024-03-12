@@ -67,13 +67,11 @@ Route::prefix('tenant')->middleware(['auth', 'tenant'])->group(function () {
 
     Route::get('aboutus', [AccountController::class, 'aboutus'])->name('aboutus');
 
-    Route::get('paymentform', [ContractController::class, 'paymentform'])->name('paymentform');
-    Route::post('paymentformPost', [ContractController::class, 'paymentformPost'])->name('paymentformPost');
+
     Route::get('profile',[ContractController::class, 'profile'])->name('profile');
     Route::get('/download-contract/{id}', [ContractController::class, 'downloadContract'])->name('tenant.download.contract');
     Route::post('/tupload-contract/{id}', [ContractController::class, 'uploadContract'])->name('tenant.upload.contract');
 
-    Route::post('/submit-payment', [ContractController::class, 'submitPayment'])->name('submit.payment');
     Route::post('inquire', [ContractController::class, 'inquire'])->name('inquire.post');
 });
 
@@ -85,6 +83,9 @@ Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
     Route::get('manageContract', [ContractController::class, 'manageContract'])->name('manageContract');
 
 
+    Route::post('/submit-payment', [ContractController::class, 'submitPayment'])->name('submit.payment');
+    Route::get('/paymentform/{contractId}', [ContractController::class, 'paymentform'])->name('paymentform');
+    Route::post('paymentformPost', [ContractController::class, 'paymentformPost'])->name('paymentformPost');
     Route::get('createproperty', [PropertyController::class, 'createproperty'])->name('createproperty')->middleware('verified.owner');
     Route::post('createproperty', [PropertyController::class, 'propertylisting'])->name('propertylisting.post');
 
