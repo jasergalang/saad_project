@@ -107,7 +107,8 @@
                                                     $documentPaths = explode(',', $owner->file_path);
                                                 @endphp
                                                 @if (count($documentPaths) > 0)
-                                                    <a href="{{ asset('/storage/documents/' . implode(',', array_map('trim', $documentPaths))) }}" download>Download All Documents</a>
+                                                    <!-- <a href="{{ asset('/storage/documents/' . implode(',', array_map('trim', $documentPaths))) }}" download>Download All Documents</a> -->
+                                                         <a href="{{ route('download.documents', ['ownerId' => $owner->id]) }}" download>Download All Documents</a>
                                                 @else
                                                     No Document Available
                                                 @endif

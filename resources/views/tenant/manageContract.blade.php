@@ -3,7 +3,9 @@
 
 @include('layout.ownerheader')
 
-<div class="container gap-6 border-t pt-4 pb-16 items-start">
+<div class="container py-6 my-10 bg-red-500 rounded-lg">
+    <div class="border container gap-6 pt-4 pb-16 items-start my-10 mt-10 bg-white rounded-2xl hover:scale-105 hover:shadow-2xl transition">
+
 
     <div class=" bg-white px-4 pb-2 overflow-hidden">
         <div class="mr-14">
@@ -69,7 +71,9 @@
     </div>
 
 </div>
-    @include('layout.footer')
+</div>
+
+
     @endsection
 
 

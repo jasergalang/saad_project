@@ -1,7 +1,8 @@
 @extends('layout.authlayout')
 
 @section('content')
-@include('layout.header')
+{{-- login --}}
+@include('layout.tenantHeader')
 
 @include('layout.nav')
 

@@ -6,6 +6,10 @@ use App\Models\{
     Property, Account, Administrator, AdminManageOwner, Owner, Tenant
 };
 use Illuminate\Http\Request;
+use ZipArchive;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -20,7 +24,11 @@ class AdminController extends Controller
     {
         $properties = Property::all();
         $owners = Owner::all();
-        return view('admin.adminVerification', compact('owners', 'properties'));
+        $files = Storage::files('public/documents');
+
+    // Extract only the file names from the paths
+    $documentPaths = array_map('basename', $files);
+        return view('admin.adminVerification', compact('owners', 'properties', 'documentPaths'));
     }
     function propertyVerification()
     {
@@ -124,6 +132,57 @@ public function destroyProperty(Property $propertyDelete)
 
     return redirect()->back()->with('success', 'Property deleted successfully!');
 }
+ // Function to create a ZIP file
+ public function createZip($owner)
+{
+    // Retrieve all document paths associated with the owner
+    $documentPaths = explode(',', $owner->file_path);
 
+    // Create a temporary directory to store the documents
+    $tempDir = sys_get_temp_dir() . '/' . uniqid('documents_');
+    mkdir($tempDir);
+
+    // Copy all the documents to the temporary directory
+    foreach ($documentPaths as $documentPath) {
+        $sourcePath = storage_path('app/public/documents/' . trim($documentPath));
+        $destinationPath = $tempDir . '/' . basename($documentPath);
+        copy($sourcePath, $destinationPath);
+    }
+
+    // Create a ZIP file containing all the documents
+    $zipFilePath = sys_get_temp_dir() . '/' . uniqid('documents_') . '.zip';
+    $zip = new ZipArchive();
+    if ($zip->open($zipFilePath, ZipArchive::CREATE) === TRUE) {
+        foreach ($documentPaths as $documentPath) {
+            $zip->addFile($tempDir . '/' . basename($documentPath), basename($documentPath));
+        }
+        $zip->close();
+    }
+
+    // Provide a download link for the ZIP file
+    return $zipFilePath;
+}
+
+
+
+// Controller method to handle the download
+public function downloadAllDocuments($ownerId)
+{
+    $owner = Owner::findOrFail($ownerId);
+    $zipFilePath = $this->createZip($owner);
+    return response()->download($zipFilePath)->deleteFileAfterSend(true);
+}
+
+public function download($documentPath)
+{
+    $filePath = public_path('documents/' . $documentPath);
+
+    if (File::exists($filePath)) {
+        // Return the file as a download response
+        return Response::download($filePath)->deleteFileAfterSend();
+    } else {
+        return back()->with('error', 'File not found.');
+    }
+}
 
 }

@@ -134,55 +134,7 @@ document.getElementById('closeProfileButton').addEventListener('click', function
             {{-- idk --}}
         </div>
 
-        <div class=" bg-white px-4 pb-2 overflow-hidden ">
-            <div class="mr-14 flex items-center">
-                <h3 class="text-xl mt-10 font-semibold">
-                    Reviews and Feedback
-                </h3>
-            </div>
-        </div>
 
-        <div class="container border-t border-b rounded-md bg-white h-24">
-            {{-- idk --}}
-        </div>
-
-        <div class="bg-white px-4 pb-2 overflow-hidden">
-            <div class="mr-14 flex items-center">
-                <h3 class="text-xl mt-10 font-semibold">
-                    Tenants Table
-                </h3>
-            </div>
-        </div>
-
-        <div class="container border rounded-md bg-white py-4 mt-4 overflow-hidden">
-            <table class="w-full">
-                <thead>
-                    <tr class="border-b">
-                        <th class="px-4 py-2 text-center">Name</th>
-                        <th class="px-4 py-2 text-center">Contact No.</th>
-                        <th class="px-4 py-2 text-center">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b">
-                        <td class="px-4 py-2 text-center">John Doe</td>
-                        <td class="px-4 py-2 text-center">123-456-7890</td>
-                        <td class="px-4 py-2 text-center">Active</td>
-                    </tr>
-                    <tr class="border-b">
-                        <td class="px-4 py-2 text-center">Jack Smith</td>
-                        <td class="px-4 py-2 text-center">456-789-0123</td>
-                        <td class="px-4 py-2 text-center">Inactive</td>
-                    </tr>
-                    <tr class="border-b">
-                        <td class="px-4 py-2 text-center">Jane Black</td>
-                        <td class="px-4 py-2 text-center">456-789-0123</td>
-                        <td class="px-4 py-2 text-center">Inactive</td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        </div>
 
     </div>
 </div>

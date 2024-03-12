@@ -5,17 +5,17 @@
 @include('layout.tenantHeader')
 
 @include('layout.nav')
-   <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('https://images.pexels.com/photos/5407074/pexels-photo-5407074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
+   <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('https://images.pexels.com/photos/17929272/pexels-photo-17929272/free-photo-of-top-floor-of-a-red-brick-residential-building.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
         <div class="container">
             <h1 class="text-4xl text-white font-medium mb-4">
-                FIndFlat
+                RenEase
             </h1>
             <p class="text-xl text-white font-medium mb-4">
                 Renting a place to stay is like unlocking a door to possibilities, <br>
                 where every key moment becomes a chapter in the story of your life.
             </p>
-            <div class="mt-12">
-                <a href="#" class="bg-red-800 text-white px-8 py-3 font-medium rounded-md border border-red-800 hover:border-primary hover:bg-transparent hover:text-white">Rent Now</a>
+            <div class="mt-12 hover:scale-105 hover:shadow-2xl transition">
+                <a href="showproperty" class="bg-red-500 text-white px-8 py-3 font-medium rounded-2xl border border-white hover:text-white">Rent Now</a>
             </div>
         </div>
    </div>
@@ -142,6 +142,8 @@
                  {{-- end of products image --}}
                 </div>
 
+
+
 {{-- q&a ? --}}
     <div class="bg-white pt-16 pb-12 border-t border-gray-100">
         <div class="container grid grdi-cols-1 py-4">
@@ -176,6 +178,7 @@
 {{-- end of q&a ? --}}
 
 @include('layout.footer')
+
 @endsection
 
 @section('scripts')

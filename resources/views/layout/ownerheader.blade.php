@@ -15,28 +15,27 @@
                 {{-- navbar links --}}
                 {{-- <div class="flex items-center justify-between flex-grow py-3 pl-96 ml-10"> --}}
                     <div class="flex items-center space-x-6 capitalize ml-10">
-                        <a href="{{route('inquiriesform')}}" class="text-gray-100 hover:underline hover:text-red-500 hover:scale-105 transition">Inquiries</a>
-                        <a href="{{route('manageContract')}}" class="text-gray-100 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">Contracts</a>
-                        <a href="{{route('showpayment')}}" class="text-gray-100 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">Payments</a>
-                        {{-- <a href="#" class="text-gray-700 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">About us</a> --}}
-
-                        @include('layout.message')
-                        {{-- listing a property button --}}
-
-                        <div class="flex items-center">
-                            <a href="createproperty" class="text-gray-100 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">
-                                <i class="fa-solid fa-plus font-medium text-sm"></i>
-                                Property
-                            </a>
-                        </div>
-
                         {{-- account button --}}
-                        <a href="user" class="text-gray-100 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">
+                        <a href="user" class="text-gray-100 hover:underline hover:text-red-500 pr-12 hover:scale-105 transition">
                             {{-- <div class="text-md">
                                 <i class="fas fa-user"></i>
                             </div> --}}
                             <div class="text-sx leading-3">Account</div>
                         </a>
+
+                        <div class="flex items-center">
+                            <a href="createproperty" class="text-gray-100 hover:underline hover:text-red-500 pr-12 hover:scale-105 transition">
+                                <i class="fa-solid fa-plus font-medium text-sm"></i>
+                                Property
+                            </a>
+                        </div>
+
+                        <a href="{{route('inquiriesform')}}" class="text-gray-100 hover:underline hover:text-red-500 hover:scale-105 transition">Inquiries</a>
+                        <a href="{{route('manageContract')}}" class="text-gray-100 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">Contracts</a>
+                        {{-- <a href="#" class="text-gray-700 hover:underline hover:text-red-500 pl-12 hover:scale-105 transition">About us</a> --}}
+
+                        @include('layout.message')
+                        {{-- listing a property button --}}
                     </div>
 
 

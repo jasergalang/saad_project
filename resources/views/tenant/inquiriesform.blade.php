@@ -1,17 +1,18 @@
 @extends('layout.authlayout')
 @section('content')
+@include('layout.ownerheader')
 
-@include('layout.header')
-@include('layout.ownernav')
 
-<div class="container mt-3 mx-auto border rounded-sm py-5 border-gray-400 ">
-    <div class="px-4 pb-2 overflow-hidden">
-        <div class="mr-14 flex items-center">
-            <h3 class="text-xl mt-5 font-semibold">
-                Pending Inquiries
-            </h3>
+
+<div class="container p-6 bg-white">
+    <div class="container mt-32 mx-auto border rounded-sm py-10 mb-20 hover:scale-105 hover:shadow-2xl bg-white hover:rounded-2xl transition border-gray-400 ">
+        <div class="px-4 pb-2 overflow-hidden">
+            <div class="mr-14 flex items-center">
+                <h3 class="text-xl mt-5 font-semibold">
+                    Pending Inquiries
+                </h3>
+            </div>
         </div>
-    </div>
 
     <div class="overflow-x-auto py-5 my-3 bg-gray-300 rounded-lg">
         <table class="table-auto w-full border-transparent">
@@ -58,10 +59,12 @@
             </tbody>
         </table>
     </div>
+</div>
 
-    <div class="px-4 pb-2 overflow-hidden">
-        <div class="mr-14 flex items-center">
-            <h3 class="text-xl mt-5 font-semibold">
+    <div class="container mb-48 mx-auto border rounded-sm py-10 mt-48  hover:scale-105 hover:shadow-2xl bg-white hover:rounded-2xl border-gray-400 ">
+        <div class="px-4 pb-2 overflow-hidden">
+            <div class="mr-14 flex items-center">
+                <h3 class="text-xl mt-5 font-semibold">
                 Accomodated Inquiries
             </h3>
         </div>
@@ -102,6 +105,7 @@
             @endforeach
         </tbody>
     </table>
+</div>
 </div>
 </div>
 @include('layout.footer')

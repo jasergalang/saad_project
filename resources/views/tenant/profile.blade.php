@@ -11,7 +11,7 @@
         <div class="flex items-center">
             <img src="https://www.svgrepo.com/show/507442/user-circle.svg" class="w-40 mr-10" alt="">
             <h3 class="text-xl font-semibold">
-                Tenant: {{ $accounts->fname }} {{ $accounts->lname }}
+                {{ $accounts->fname }} {{ $accounts->lname }}
             </h3>
         </div>
     </div>
@@ -56,8 +56,6 @@
                     <tr class="border-b">
                         <th class="w-2/6 px-6 py-2 text-center">Property Name</th>
                         <th class="w-1/6 px-6 py-2 text-center">Landlord</th>
-                        <th class="w-1/6 px-6 py-2 text-center">Download</th>
-                        <th class="w-1/6 px-6 py-2 text-center">Upload</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,33 +63,7 @@
                     <tr class="border-b">
                         <td class="w-2/6 px-6 py-2 whitespace-normal">{{ $inquiry->property->description->title }} {{ $inquiry->property->description->description }}</td>
                         <td class="w-1/6 px-6 py-2 whitespace-normal text-center">{{ $accounts->fname }} {{ $accounts->lname }}</td>
-                        <td class="w-1/6 px-6 py-2 text-center">
-                            @if ($inquiry->contract)
-                            <a href="{{ route('tenant.download.contract', ['id' => $inquiry->id]) }}" class="text-red-500 hover:underline text-md">
-                                Download Contract
-                            </a>
-                        @else
-                            No Contract Available
-                        @endif
-                        </td>
-                        <td class="w-1/6 px-6 py-2 text-center">
-                            <form id="upload-form" action="{{ route('tenant.upload.contract', ['id' => $inquiry->id]) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <label for="contract-file" class="text-red-500 hover:underline cursor-pointer text-md">
-                                    <span id="file-name-label">Choose a file</span>
-                                    <input type="file" id="contract-file" name="contract_file" accept=".pdf" style="display: none;" onchange="updateFileNameLabel()">
-                                </label>
-                            </form>
 
-                            <script>
-                                function updateFileNameLabel() {
-                                    var fileNameLabel = document.getElementById('file-name-label');
-                                    fileNameLabel.textContent = document.getElementById('contract-file').files[0].name;
-
-                                    document.getElementById('upload-form').submit();
-                                }
-                            </script>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -140,7 +112,6 @@
 {{-- account wrapper --}}
 @include('layout.footer')
 @endsection
-
 
 @section('scripts')
     @parent

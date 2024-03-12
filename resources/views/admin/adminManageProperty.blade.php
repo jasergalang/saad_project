@@ -1,3 +1,7 @@
+@extends('layout.authlayout')
+
+@section('content')
+@include('layout.adminNavbar');
 <div class="container mt-8 mx-auto border rounded-sm py-5 border-gray-400"id="veripropertylist">
 
     <div class="px-4 pb-2 overflow-hidden">
@@ -44,3 +48,29 @@
     </div>
 
 </div>
+
+@include('layout.footer')
+@endsection
+
+@section('scripts')
+    @parent
+
+    @if(session('success'))
+        <script>
+            alert("{{ session('success') }}");
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            var errorMessage = @json($errors->all());
+            alert(errorMessage.join('\n'));
+        </script>
+    @endif
+@endsection
+

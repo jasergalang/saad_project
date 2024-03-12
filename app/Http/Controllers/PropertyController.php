@@ -217,16 +217,13 @@ class PropertyController extends Controller
 
         $property->update([
             'property_type' => $request->input('property_type'),
-            'long_term' => $request->has('long_term'),
-            'short_term' => $request->has('short_term'),
-            'minimum_stay' => $request->input('minimum_stay'),
+
         ]);
         // Update or create property rates
         $property->rate()->updateOrCreate(
             [],
             [
-                'daily_rate' => $request->input('daily_rate'),
-                'weekly_rate' => $request->input('weekly_rate'),
+
                 'monthly_rate' => $request->input('monthly_rate'),
             ]
         );

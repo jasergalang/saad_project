@@ -117,13 +117,16 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('adminManagement', [AdminController::class, 'adminManagement'])->name('adminManagement');
     Route::get('adminVerification', [AdminController::class, 'adminVerification'])->name('adminVerification');
     Route::get('adminInterface', [AdminController::class, 'adminInterface'])->name('adminInterface');
-
+    Route::get('/admin/manage-property', [AdminController::class, 'adminManageProperty'])->name('adminproperty');
     Route::patch('owner/{id}', [AdminController::class, 'verifylandlord'])->name('admin.verify.landlord');
     Route::patch('property/{id}', [AdminController::class, 'verifyproperty'])->name('admin.verify.property');
 
     Route::delete('/owners/{ownerDelete}', [AdminController::class, 'destroyOwner'])->name('admin.destroy.owner');
     Route::delete('/tenants/{tenantDelete}', [AdminController::class, 'destroyTenant'])->name('admin.destroy.tenant');
     Route::delete('/properties/{propertyDelete}', [AdminController::class, 'destroyProperty'])->name('admin.destroy.property');
+    Route::get('/download/documents/{ownerId}', [AdminController::class, 'downloadAllDocuments'])->name('download.documents');
+    Route::get('/download/{documentPath}', [AdminController::class, 'download'])->name('download.document');
+
 });
 
 

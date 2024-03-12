@@ -11,7 +11,7 @@
                 <a href="" class="text-black hover:text-gray-300">Dashboard</a>
                 <a href="{{ route('adminVerification') }}" class="text-black hover:text-gray-300 ">Verification</a>
                 <a href="{{ route('adminManagement') }}" class="text-black hover:text-gray-300">Management</a>
-                <a href="" class="text-black hover:text-gray-300">Properties</a>
+                <a href="{{ route('adminproperty') }}" class="text-black hover:text-gray-300">Properties</a>
             </div>
             <div class="flex-initial">
                 @auth
