@@ -41,20 +41,14 @@ class AccountController extends Controller
     }
     public function __construct()
     {
-        $this->middleware('web'); // Apply 'web' middleware to all methods in this controller
+        $this->middleware('web');
     }
     function loginPost(Request $request)
     {
         $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|min:8|max:15',
-    ], [
-        'email.required' => 'Email is required.',
-        'email.email' => 'Invalid email format.',
-        'password.required' => 'Password is required.',
-        'password.min' => 'Password must be at least 8 characters.',
-        'password.max' => 'Password must not exceed 15 characters.',
-    ]);
+            'email' => 'required|email',
+            'password' => 'required|min:8|max:15',
+        ]);
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
@@ -191,9 +185,16 @@ class AccountController extends Controller
     }
     public function users()
     {
-        $accounts_id = auth()->id();
-        $owners = Owner::where('account_id', $accounts_id)->get();
+        $accountId = auth()->id();
 
+        // Retrieve owners with all properties (including soft-deleted)
+        $owners = Owner::with(['properties' => function ($query) {
+            $query->withTrashed(); // Include soft-deleted properties
+        }])
+        ->where('account_id', $accountId)
+        ->get();
+
+        // Flatten the properties
         $properties = $owners->flatMap(function ($owner) {
             return $owner->properties;
         })->all();
@@ -248,9 +249,9 @@ class AccountController extends Controller
         $message->save();
 
         // Fetch the latest messages for the given property ID
-        $latestMessages = $this->getLatestMessages($request->input('property_id'));
+        // $latestMessages = $this->getLatestMessages($request->input('property_id'));
 
-        return response()->json(['success' => true, 'messages' => $latestMessages]);
+        return redirect()->back()->with('success', 'Property restored successfully.');
     }
 
 
@@ -258,7 +259,6 @@ class AccountController extends Controller
     {
         // Retrieve the latest messages for the given property ID using Eloquent
         $latestMessages = Message::where('property_id', $propertyId)
-            ->orderBy('created_at', 'content')
             ->take(10) // Assuming you want to retrieve the latest 10 messages, adjust as needed
             ->get();
 
@@ -268,5 +268,11 @@ class AccountController extends Controller
         return $latestMessages;
     }
 
+    public function restore($id )
+    {
+        $property=Property::withTrashed()->where('id', $id)->first();
+        $property->restore();
+        return redirect()->back()->with('success', 'Property restored successfully.');
+    }
 
 }
