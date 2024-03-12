@@ -30,7 +30,7 @@
                         <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry)->id }}</td>
                         <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->property->description)->title }}</td>
                         <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->tenant->account)->fname }}</td>
-                        <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->contract)->contracts_status }}</td>
+                        <td class="px-4 py-2 border-b border-gray-400">{{ optional($inquiry->contract)->contract_status }}</td>
                         <td class="px-5 py-2 border-b border-gray-400 text-center" style="width: 15%;"><button class="bg-transparent rounded-md px-5 py-1 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold"><i class="fa-solid fa-circle-minus"></i></button></td>
                     </tr>
                 @endforeach

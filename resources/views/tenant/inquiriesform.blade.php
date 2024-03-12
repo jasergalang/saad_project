@@ -20,7 +20,7 @@
                     <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">ID</th>
                     <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">Tenant Name</th>
                     <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">Property Title</th>
-                    <th class="py-2 text-gray-800 border-b border-r border-gray-400">View Chat</th>
+                    <th class="py-2 text-gray-800 border-b border-r border-gray-400">Chat</th>
                     <th class="py-2 text-gray-800 border-b border-r border-gray-400">Accept</th>
                     <th class="py-2 text-gray-800 border-b border-gray-400">Reject</th>
 
@@ -73,9 +73,10 @@
                 <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">ID</th>
                 <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">Tenant Name</th>
                 <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400">Property Title</th>
-                <th class="py-2 text-gray-800 border-b border-r border-gray-400">View Chat</th>
+                <th class="py-2 text-gray-800 border-b border-r border-gray-400">Chat</th>
 
                 <th class="py-2 text-gray-800 border-b border-r border-gray-400">Status</th>
+                <th class="py-2 text-gray-800 border-b border-r border-gray-400">Create Contract</th>
             </tr>
         </thead>
         <tbody>
@@ -91,6 +92,11 @@
                     </a>
                 </td>
                 <td class="px-4 py-2 border-b border-gray-400">{{ $inquiry->inquiry_status }}</td>
+                <td class="px-4 py-2 border-b border-gray-400 text-center">
+                    <a href="{{ route('tenantcontract', ['inquiry_id' => $inquiry->id]) }}" class="bg-transparent rounded-md px-5 hover:bg-primary hover:border-b hover:border-t hover:border-primary hover:text-white font-bold">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </a>
+                </td>
             </tr>
             @endif
             @endforeach

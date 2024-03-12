@@ -18,8 +18,10 @@ class ContractController extends Controller
         $propertyTitle = session('propertyTitle');
         $tenantDetails = session('tenantDetails');
         $inquiry = session('inquiry');
+        $propertyAddress = session('propertyAddress');
 
-        return view('tenant.tenantcontract', compact('propertyTitle', 'tenantDetails', 'inquiry', 'inquiries_id'));
+
+        return view('tenant.tenantcontract', compact('propertyTitle', 'tenantDetails', 'inquiry', 'inquiries_id', 'propertyAddress'));
     }
     //In viewproperty
     public function inquire(Request $request)
@@ -78,17 +80,19 @@ class ContractController extends Controller
         $tenant = $inquiry->tenant;
 
         $propertyTitle = $property->description->title;
+
         $tenantDetails = $tenant->account;
+        $propertyAddress = $property->address;
 
         session([
             'inquiry' => $inquiry,
             'propertyTitle' => $propertyTitle,
             'tenantDetails' => $tenantDetails,
+            'propertyAddress' => $propertyAddress,
             'id' => $id,
         ]);
 
-        return redirect()->route('tenantcontract')->with('success', 'Inquiry accepted successfully!');
-
+        return redirect()->back()->with('success', 'Inquiry accepted successfully!');
     }
     public function rejectInquiry($id)
     {
@@ -111,46 +115,41 @@ class ContractController extends Controller
     }
     public function createContract(Request $request, $inquiry_id)
     {
-        $propertyTitle = session('propertyTitle');
-        $tenantDetails = session('tenantDetails');
-
         $request->validate([
-            'payment_method' => 'required|in:Digital,Physical',
-            'payment_agreement' => 'required|in:Daily,Weekly,Monthly',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
 
         $contractData = [
             'inquiry_id' => $inquiry_id,
-            'payment_method' => $request->input('payment_method'),
-            'payment_agreement' => $request->input('payment_agreement'),
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
         ];
 
         $contract = Contract::create($contractData);
-        // Load the template file content
-        $templatePath = resource_path('templates/lease_agreement.docx');
-        $templateContent = file_get_contents($templatePath);
 
-        // Replace placeholders in the template with actual data
-        $templateContent = preg_replace('/PROPERTY_NAME/i', $propertyTitle, $templateContent);
-        $templateContent = preg_replace('/TENANT_NAME/i', $tenantDetails->fname . ' ' . $tenantDetails->lname, $templateContent);
+        $uploadedFilePaths = [];
 
-        // Add more replacements as needed
+        // Handle file upload
+        if ($request->hasFile('uploaded_files')) {
+            foreach ($request->file('uploaded_files') as $uploadedFile) {
+                $fileName = uniqid() . '_' . $uploadedFile->getClientOriginalName();
+                $uploadedFile->storeAs('documents', $fileName, 'public'); // Make sure the 'documents' folder exists in your storage directory
+                $uploadedFilePaths[] = $fileName;
+            }
 
-        // Save the processed content
-        $docxFilePath = public_path('contracts/contract_' . $contract->id . '.docx');
-        file_put_contents($docxFilePath, $templateContent);
-
-        // Attach the DOCX file path to the contract
-        $contract->lease_agreement = 'contracts/contract_' . $contract->id . '.docx';
-        $contract->save();
+            // Update the contract with the file paths
+            $contract->lease_agreement = json_encode($uploadedFilePaths); // Store file paths as JSON
+            $contract->save();
+        }
         session(['contract' => $contract]);
 
         return redirect()->back()->with('success', 'Contract created successfully');
     }
+
+
+
+
     public function paymentform()
     {
         $accountId = auth()->user()->id;

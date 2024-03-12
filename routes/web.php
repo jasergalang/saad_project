@@ -99,7 +99,7 @@ Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
     Route::post('/inquiries/{id}/accept', [ContractController::class, 'acceptInquiry'])->name('inquiries.accept');
 
     Route::get('/tenantcontract', [ContractController::class, 'tenantcontract'])->name('tenantcontract');
-    Route::post('/tenantcontract/{inquiries_id}', [ContractController::class, 'createcontract'])->name('createcontract');
+    Route::post('/tenantcontract/{inquiry_id}', [ContractController::class, 'createcontract'])->name('createcontract');
     Route::get('user',[AccountController::class, 'users'])->name('user');
 
     Route::get('inquiriesform', [ContractController::class, 'inquiriesform'])->name('inquiriesform');
