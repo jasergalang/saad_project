@@ -2,15 +2,18 @@
 
 @section('content')
 {{-- login --}}
+{{-- login --}}
 <div class="flex justify-end px-6 py-4">
     <a href="{{ route('showproperty') }}" class="text-black text-2xl font-semibold">
         <i class="fa-solid fa-circle-xmark mr-5 fa-lg"></i>
     </a>
 </div>
-{{-- viewing --}}
-    <div class="container grid grid-cols-5 gap-6 pt-4 pb-16 items-start">
+
+<div class="p-3 bg-orange-300">
+    {{-- viewing --}}
+    <div class="container grid grid-cols-5 gap-6 pt-4 pb-16 mt-20 items-start">
         {{-- product --}}
-        <div class="col-span-3 bg-white px-4 py-6 shadow rounded overflow-hidden">
+        <div class="col-span-3 bg-white px-4 py-6 shadow rounded-2xl overflow-hidden hover:scale-105 hover:shadow-2xl transition">
 
         {{-- imagess --}}
 
@@ -105,7 +108,7 @@
         {{-- end of product --}}
 
   {{-- user info --}}
-    <div class="col-span-2 bg-white px-4 pb-2 overflow-hidden">
+    <div class="col-span-2 bg-white px-4 pb-2 overflow-hidden rounded-2xl hover:scale-105 hover:shadow-2xl transition">
 
         <div class="grid grid-cols-2 gap-6 pt-4 pb-2 items-start">
 
@@ -175,8 +178,8 @@
         <input type="text" name="name" value="{{ auth()->user()->fname }}" readonly class="mt-1 p-2 border rounded w-full" required>
     @endauth
 
-    <label for="message" class="block text-sm font-medium text-gray-700 mt-4">Message:</label>
-    <textarea name="message" rows="4" cols="50" placeholder="Type your message here..." class="mt-1 p-2 border rounded w-full" required></textarea>
+    {{-- <label for="message" class="block text-sm font-medium text-gray-700 mt-4">Message:</label>
+    <textarea name="message" rows="4" cols="50" placeholder="Type your message here..." class="mt-1 p-2 border rounded w-full" required></textarea> --}}
 
     <!-- Add other form fields as needed -->
 
@@ -186,7 +189,7 @@
     </button>
 </form>
 @else
-<a href="{{ route('chat.show', $property->id) }}" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
+<a href="{{ route('chat.show', $property->id) }}" class="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center">
     <i class="fas fa-comment-alt mr-2"></i>
     Chat with Landlord
 </a>
@@ -207,8 +210,10 @@
 </div>
 {{-- viewing ends --}}
 
+</div>
 
-@include('layout.footer');
+
+{{-- @include('layout.footer'); --}}
 @endsection
 
 @section('scripts')

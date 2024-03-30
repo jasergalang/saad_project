@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\{
-    Property, Account, Administrator, AdminManageOwner, Owner, Tenant
+    Property, Account, Administrator, AdminManageOwner, Owner, Tenant, Payment
 };
 use Illuminate\Http\Request;
 use ZipArchive;
@@ -48,11 +48,21 @@ class AdminController extends Controller
         $properties = Property::with('description')->get();
         return view('admin.adminManageProperty', compact('properties'));
     }
-    function adminManageTenant()
+    public function adminManageTenant()
     {
+        // Retrieve all tenants with their associated accounts
+        $tenants = Tenant::with('account')->get();
 
-        return view('admin.adminManageTenant');
+        return view('admin.adminManageTenant', compact('tenants'));
     }
+    public function adminManageLandlord()
+    {
+        // Retrieve all tenants with their associated accounts
+        $owners = Owner::with('account')->get();
+
+        return view('admin.adminManageLandlord', compact('owners'));
+    }
+
 
     public function verifylandlord($id)
     {
@@ -185,4 +195,23 @@ public function download($documentPath)
     }
 }
 
+public function dashboard()
+{
+    // Count the number of tenants
+    $totalTenants = Tenant::count();
+
+    // Count the number of owners
+    $totalOwners = Owner::count();
+
+    // Calculate the total amount of payments
+    $totalPayments = Payment::sum('amount');
+
+    // Count the number of rented properties
+    $totalRentedProperties = Property::whereHas('inquiries', function ($query) {
+        $query->whereNotNull('tenant_id');
+    })->count();
+
+    return view('admin.adminDashboard', compact('totalTenants', 'totalOwners', 'totalPayments', 'totalRentedProperties'));
+
+}
 }

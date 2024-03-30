@@ -111,7 +111,7 @@
 
 
                         <p class="text-gray-500 mt-1 ml-3 text-xs font-extralight text-gray-200">
-                            Note: Please upload the required documents for verification based on your landlord type.
+                            Note: Please upload the required documents below.
                         </p>
 
                         <ul>

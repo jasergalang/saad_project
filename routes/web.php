@@ -111,9 +111,14 @@ Route::prefix('owner')->middleware(['auth', 'owner'])->group(function () {
 Route::get('adminregister',[AccountController::class, 'adminregister'])->name('adminregister');
 Route::post('adminregister', [AccountController::class, 'adregister'])->name('adminregister.post');
 
-
-
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/payments', [ContractController::class, 'adminpayments'])->name('adminpayments');
+
+    Route::get('adminManageTenant', [AdminController::class, 'adminManageTenant'])->name('adminManageTenant');
+    Route::get('adminDashboard', [AdminController::class, 'dashboard'])->name('adminDashboard');
+    Route::get('adminManageLandlord', [AdminController::class, 'adminManageLandlord'])->name('adminManageLandlord');
+
     Route::get('adminManagement', [AdminController::class, 'adminManagement'])->name('adminManagement');
     Route::get('adminVerification', [AdminController::class, 'adminVerification'])->name('adminVerification');
     Route::get('adminInterface', [AdminController::class, 'adminInterface'])->name('adminInterface');

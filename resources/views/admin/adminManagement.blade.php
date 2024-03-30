@@ -33,7 +33,7 @@
                                             <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400 bg-gray-300">Name</th>
                                             <th class="px-4 py-2 text-gray-800 border-b border-r border-gray-400 bg-gray-300">Email</th>
                                             <th class="py-2 text-gray-800 border-b  border-r border-gray-400 bg-gray-300">Delete</th>
-                                            <th class="py-2 text-gray-800 border-r border-gray-400 bg-gray-300">Restore</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>

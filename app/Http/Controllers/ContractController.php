@@ -309,4 +309,12 @@ class ContractController extends Controller
 
 
 
+    public function adminpayments()
+    {
+        // Fetch payments with eager loading of related data
+        $payments = Payment::with('contract.inquiry.property.description', 'contract.inquiry.tenant.account')->get();
+        return view('admin.adminpayments', compact('payments'));
+    }
+
+
 }

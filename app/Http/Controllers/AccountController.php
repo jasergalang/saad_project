@@ -248,7 +248,7 @@ class AccountController extends Controller
 
         $message->save();
 
-        return redirect()->back()->with('success', 'Property restored successfully.');
+        return redirect()->back()->with('success', 'Message sent.');
     }
 
 

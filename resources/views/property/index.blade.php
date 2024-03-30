@@ -49,8 +49,8 @@
         </div>
    </div>
 {{-- end of feature --}}
+{{--
 
-{{-- browsing by categories --}}
 <div class="container py-16">
     <h2 class="text-3xl font-medium text-gray-800 mb-6">Rent by Category</h2>
 
@@ -97,7 +97,7 @@
         </div>
     </div>
 </div>
-{{-- end of browing by categories --}}
+ --}}
 
 
 
@@ -123,6 +123,17 @@
                                 <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">{{ optional($property->description)->title }}</h4>
                             </a>
                             <div class="flex items-baseline mb-1 space-x-2 font-roboto">
+
+                                <p class="text-xl text-primary font-semibold">
+                                    Address: {{ optional($property->address)->unit_number }} {{ optional($property->address)->floor }} {{ optional($property->address)->street }} {{ optional($property->address)->city }}
+
+
+                                </p><br>
+
+                            </div>
+                            <div class="flex items-baseline mb-1 space-x-2 font-roboto">
+
+
                                 <p class="text-xl text-primary font-semibold">
                                     @if ($property->monthly_rate)
                                         Contact agent for price

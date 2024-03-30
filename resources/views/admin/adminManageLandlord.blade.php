@@ -8,12 +8,12 @@
             <div class="grid grid-cols-5 gap-4">
                 <div class="col-span-5 bg-white rounded-lg p-10 shadow-sm">
 
-                    {{-- Tenant Details --}}
+                    {{-- Landlord Details --}}
                     <div class="px-4 pb-2 overflow-hidden my-3 rounded-2xl hover:scale-105 hover:shadow-2xl transition">
                         <div class="px-4 pb-2 bg-white rounded-2xl overflow-hidden">
                             <div class="mr-14 flex items-center">
                                 <h3 class="text-xl mt-5 font-semibold">
-                                    Tenant Details
+                                    Landlord Details
                                 </h3>
                             </div>
                             <hr class="my-2 text-black bg-black rounded-lg border h-2">
@@ -29,11 +29,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tenants as $tenant)
+                                    @foreach ($owners as $owner)
                                         <tr class="hover:bg-gray-100">
-                                            <td class="px-4 py-2 border-b border-gray-400">{{ $tenant->id }}</td>
-                                            <td class="px-4 py-2 border-b border-gray-400">{{ $tenant->account->fname }} {{ $tenant->account->lname }}</td>
-                                            <td class="px-4 py-2 border-b border-gray-400">{{ $tenant->account->email }}</td>
+                                            <td class="px-4 py-2 border-b border-gray-400">{{ $owner->id }}</td>
+                                            <td class="px-4 py-2 border-b border-gray-400">{{ $owner->account->fname }} {{ $owner->account->lname }}</td>
+                                            <td class="px-4 py-2 border-b border-gray-400">{{ $owner->account->email }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -46,8 +46,6 @@
         </div>
     </div>
 @endsection
-
-
 @section('scripts')
     @parent
 

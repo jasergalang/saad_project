@@ -8,13 +8,13 @@
             </div>
 
             <div class="flex-1 flex justify-center space-x-6">
-                <a href="" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Dashboard</a>
+                <a href="{{ route('adminDashboard') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Dashboard</a>
+                <a href="{{ route('adminManagement') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Management </a>
                 <a href="{{ route('adminVerification') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Verification</a>
-                <a href="{{ route('adminproperty') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Properties</a>
-                <a href="{{ route('adminproperty') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Renter's List</a>
-                <a href="{{ route('adminproperty') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Landlord's List</a>
+                <a href="{{ route('adminManageTenant') }}"  class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Renter's List</a>
+                <a href="{{ route('adminManageLandlord') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Landlord's List</a>
                 <a href="{{ route('adminproperty') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Contracts</a>
-                <a href="{{ route('adminManagement') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Payments</a>
+                <a href="{{ route('adminpayments') }}" class="text-black hover:text-red-500 hover:scale-105 hover:underline font-semibold">Payments</a>
             </div>
             <div class="flex-initial">
                 @auth
